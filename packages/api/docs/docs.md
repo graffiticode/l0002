@@ -1,12 +1,12 @@
-# L0002 User Manual
+# L0162 User Manual
 
 **Introduction**
 
 *Graffiticode* is a collection of domain languages used for creating task
-specific web apps. **L0002** is a *Graffiticode* language for writing
+specific web apps. **L0162** is a *Graffiticode* language for writing
 'hello, world' web apps.
 
-L0002 can be used as a template for creating other, presumably more
+L0162 can be used as a template for creating other, presumably more
 interesting and useful, languages.
 
 ### Overview
