@@ -1,21 +1,19 @@
 window.gcexports.globalLexicon = {
-  "hello" : {
-    "tk": 1,
-    "name": "HELLO",
-    "cls": "function",
-    "length": 1,
+  "max-tokens" : {
+    "name": "MAX_TOKENS", "length": 2,
+    "tk": 1, "cls": "function",
   },
-  "image" : {
-    "tk": 1,
-    "name": "IMAGE",
-    "cls": "function",
-    "length": 1,
+  "messages" : {
+    "name": "MESSAGES", "length": 2,
+    "tk": 1, "cls": "function",
   },
-  "theme" : {
-    "tk": 1,
-    "name": "THEME",
-    "cls": "function",
-    "length": 2,
+  "model" : {
+    "name": "MODEL", "length": 2,
+    "tk": 1, "cls": "function",
+  },
+  "role" : {
+    "name": "ROLE", "length": 2,
+    "tk": 1, "cls": "function",
   },
   "val" : { "tk": 1, "name": "VAL", "cls": "function", "length": 2 , "arity": 2 },
   "key" : { "tk": 1, "name": "KEY", "cls": "function", "length": 2 , "arity": 2 },
