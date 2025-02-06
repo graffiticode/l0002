@@ -39,6 +39,11 @@ export const getApiData = async ({ accessToken, id }) => {
 
 export const postApiCompile = async ({ accessToken, id, data }) => {
   try {
+    // console.log(
+    //   "L0002/postApiCompile()",
+    //   "id=" + id,
+    //   "data=" + JSON.stringify(data, null, 2)
+    // );
     const headers = {
       authorization: accessToken,
       "x-graffiticode-storage-type": "persistent",
