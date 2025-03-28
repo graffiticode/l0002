@@ -2,7 +2,7 @@
 <!-- Built with spec-md https://spec-md.com -->
 <html>
 <head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1"><title>L0002 User Manual</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"><title>Graffiticode Language Specification</title>
 <style>@media (prefers-color-scheme: light){:root{--color-foreground: #333333;--color-background: #ffffff;--color-light-grey: #ccc;--color-grey: #666666;--color-white: #fff;--color-link: #3b5998;--color-subsection-link: var(--color-foreground);--color-toc-link: var(--color-foreground);--color-toc-id: var(--color-link);--color-toggle-border: #bbc;--color-sidebar-background: #f0f0f0;--color-sidebar-viewing-link: #8b9;--color-sidebar-toggle-button: rgba(0, 0, 0, .7);--color-sidebar-shadow-inset: rgba(0, 0, 0, .05);--color-sidebar-shadow: rgba(0, 0, 0, .04);--color-sidebar-large-shadow: rgba(0, 0, 0, .08);--color-pre-background: #fafafa;--color-pre-border: #e9e9e9;--color-code-background: rgba(0, 0, 0, .03);--color-spec-todo: var(--color-grey);--color-spec-example: #fafaff;--color-spec-example-border: #bbbbff;--color-spec-counter-example: #fffafa;--color-spec-counter-border: #ffbbbb;--color-spec-counter-example-link: #98593b;--color-spec-added-border: #396;--color-spec-removed-border: #933;--color-spec-prose: var(--color-grey);--color-spec-quantifier-list: var(--color-link);--color-spec-quantifier-optional: #83238e;--color-spec-condition: #1c7758;--color-spec-param: var(--color-grey);--color-spec-rx: var(--color-foreground);--color-spec-note-border: #f4e925;--color-spec-note-background: #fefef3;--color-spec-note-first-link: #6c6613;--color-source-link: var(--color-light-grey);--color-table-header: #f9f9f9;--color-table-header-border: #d0d0d0;--color-token-inserted: hsla(241, 71%, 34%, .69);--color-token-deleted: hsla(324, 92%, 33%, .74);--color-inserts-background: rgba(0, 200, 30, .08);--color-deletions-background: rgba(200, 0, 0, .08);--selection-background-color: #cacee0;--selection-background-color-link: #f0babe}.selection-link:hover{--selection-background-color: #3b5998}}@media (prefers-color-scheme: dark){:root{--color-foreground: #b6b6b6;--color-background: #262626;--color-light-grey: #373737;--color-grey: #828282;--color-white: rgb(29, 29, 29);--color-link: #89b7da;--color-subsection-link: var(--color-foreground);--color-toc-link: var(--color-foreground);--color-toc-id: var(--color-link);--color-toggle-border: #bbc;--color-sidebar-background: #323232;--color-sidebar-viewing-link: #8b9;--color-sidebar-toggle-button: rgba(220, 220, 220, .7);--color-sidebar-shadow-inset: rgba(0, 0, 0, .05);--color-sidebar-shadow: rgba(0, 0, 0, .04);--color-sidebar-large-shadow: rgba(0, 0, 0, .08);--color-pre-background: #2e2e2e;--color-pre-border: #3a3a3a;--color-code-background: rgba(41, 41, 41, .03);--color-spec-todo: var(--color-grey);--color-spec-example: #2b2b35;--color-spec-example-border: #4d4d6d;--color-spec-counter-example: #322828;--color-spec-counter-border: #664040;--color-spec-counter-example-link: #ff702d;--color-spec-added-border: #396;--color-spec-removed-border: #933;--color-spec-prose: var(--color-grey);--color-spec-quantifier-list: var(--color-link);--color-spec-quantifier-optional: #c689ce;--color-spec-condition: #6fa889;--color-spec-param: var(--color-grey);--color-spec-rx: var(--color-foreground);--color-spec-note-border: #605e39;--color-spec-note-background: #303028;--color-spec-note-first-link: #f0e330;--color-source-link: var(--color-grey);--color-table-header: #373737;--color-table-header-border: #525252;--color-token-inserted: hsla(241, 63%, 70%, .69);--color-token-deleted: hsla(325, 64%, 67%, .74);--color-inserts-background: rgba(0, 200, 30, .08);--color-deletions-background: rgba(200, 0, 0, .08);--selection-background-color: #656565;--selection-background-color-link: #f0babe}.selection-link:hover{--selection-background-color: #829edb}}:root{color:var(--color-foreground);background-color:var(--color-background);font-family:var(--font-family);font-size:15px;line-height:1.5;--mono-font-size: 13px;--indent: 1rem;--list-indent: 1.5rem;--dfn-indent: 0rem;--font-family: Cambria, "Palatino Linotype", Palatino, "Liberation Serif", serif;--font-family-monospace: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace}@media (min-width: 720px){:root{font-size:17px;--mono-font-size: 15px;--indent: 2rem;--list-indent: 2rem;--dfn-indent: 2rem}}body{margin:3rem 0 3rem}article{margin:0 1rem}@media (min-width: 720px){body{margin:6rem auto 3rem;max-width:800px;padding-left:75px;padding-right:clamp(0px,calc((100vw - 800px) * .25),75px)}}.source-link{display:none}@media screen and (min-width: 720px){.source-link{display:block;position:absolute;width:18px;fill:var(--color-source-link);opacity:.3}.source-link:hover{opacity:1}}.outdated-selection-link,.selection-link{position:absolute;display:block;color:var(--color-white);background:var(--selection-background-color);border-radius:4px;font-size:36px;height:23px;line-height:48px;text-align:center;text-decoration:none;width:25px;user-select:none;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none}.outdated-selection-link:hover,.selection-link:hover{text-decoration:none}.outdated-selection-link:before,.selection-link:before{border:5px solid transparent;content:"";height:0;margin-top:-5px;margin-right:-5px;position:absolute;right:1px;top:50%;width:0}@media (max-width: 719px){.outdated-selection-link:before,.selection-link:before{border-bottom-color:var(--selection-background-color);border-top:0;right:50%;top:1px}}@media (min-width: 720px){.outdated-selection-link:before,.selection-link:before{border-left-color:var(--selection-background-color);border-right:0;right:1px;top:50%}}.outdated-selection-link{background:var(--selection-background-color-link);font-size:21px;font-weight:800;line-height:27px}.outdated-selection-link:hover:after{content:"This selection content has changed since this link was created.";font:9pt/11pt var(--font-family);position:absolute;display:block;white-space:nowrap;padding:2px 5px 1px;top:-20px;background:black;color:var(--color-white)}a{color:var(--color-link);text-decoration:none}a:hover{text-decoration:underline}img{max-width:100%}dl{margin:1rem 0 1rem var(--dfn-indent)}dd{margin:.25em 0 .5em var(--indent)}dd+dd{margin-top:1rem}dfn,.spec-ref{font-style:italic}dfn>a,.spec-ref>a{color:inherit}h1,h2,h3,h4,h5,h6{font-weight:bold;margin:3em 0 1em;position:relative}@media (min-width: 720px){header>h1{margin:6em 0 3em}}h1{font-size:1.5em;margin-top:5em}h2,h3{font-size:1.25em}h4,h5,h6{font-size:1em}section{padding-top:1rem;margin-top:-1rem}section.subsec>h6{margin-top:2em}section.subsec>h6>a{color:var(--color-subsection-link)}section .spec-secid{margin-right:1ex}@media (min-width: 720px){section .spec-secid{position:absolute;right:100%;text-align:right;white-space:nowrap}}footer{font-size:75%;opacity:.5;text-align:center;margin-top:12rem}.spec-toc{margin:1rem 0 3rem}.spec-toc .title{content:"Contents";display:block;font-weight:bold;margin:5em 0 1em}.spec-toc .spec-secid{margin-right:1ex}.spec-toc ol{list-style:none;padding-left:0;margin-top:0;margin-bottom:0}.spec-toc ol ol{list-style:none;padding-left:2ex;margin-bottom:.25em}.spec-toc li{position:relative;padding:5px 0 0 30px;margin:-5px 0 0 -30px}.spec-toc a{color:var(--color-toc-link)}.spec-toc a:hover{text-decoration:none}.spec-toc a .spec-secid{color:var(--color-toc-id)}.spec-toc a:hover .spec-secid{text-decoration:underline}.spec-toc .toggle{display:none}.spec-toc .toggle+label{cursor:pointer;left:6px;opacity:1;padding:5px 6px 5px 7px;position:absolute;top:6px;transform:rotate(0deg);transition:all .18s ease-in-out}.spec-toc .toggle+label:after{border-color:transparent transparent transparent var(--color-toggle-border);border-style:solid;border-width:6px 0 6px 7px;content:" ";display:block;height:0;width:0}@media (pointer: fine){.spec-toc .toggle+label{left:10px;padding:3px 5px 3px 6px;top:8px}}.spec-toc .toggle:checked+label{transform:rotate(90deg)}@media (hover: hover){.spec-toc li:not(:hover)>.toggle:checked+label{opacity:0}}.spec-toc .toggle:not(:checked)~ol{max-height:0;overflow:hidden;margin:0}.spec-sidebar-toggle{display:none}.spec-sidebar-toggle+label>.spec-sidebar-button{position:fixed;right:0;top:0;padding:10px 15px;font-size:30px;color:var(--color-sidebar-toggle-button);z-index:2;cursor:pointer;user-select:none;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none}.spec-sidebar-toggle:checked+label:after{content:"";position:fixed;top:0;left:0;width:100vw;height:100vh;z-index:0}.spec-sidebar{display:none;position:fixed;right:0;top:0;width:min(320px,calc(100vw - 48px));font-size:14px;line-height:1.75;overflow-y:scroll;height:100%;padding:0 0 5rem 30px;box-sizing:border-box;background:var(--color-sidebar-background);box-shadow:inset 1px 0 var(--color-sidebar-shadow-inset),-4px 0 8px -2px var(--color-sidebar-shadow);overscroll-behavior:contain}.spec-sidebar{user-select:none;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none}.spec-sidebar-toggle:checked~.spec-sidebar{display:block}.spec-sidebar .viewing>a:after{color:var(--color-sidebar-viewing-link);content:"\2022";margin-left:1ex}@media (min-width: 1220px){.spec-sidebar-toggle+label{display:none}.spec-sidebar{display:block;box-shadow:inset 1px 0 var(--color-sidebar-shadow-inset),inset 4px 0 8px -2px var(--color-sidebar-large-shadow)!important}body{padding-right:345px}}.spec-note{background:var(--color-spec-note-background);border-left:solid 4px var(--color-spec-note-border);margin:1rem -1rem;min-width:70vw;padding:8px 1rem 12px calc(1rem - 4px);width:-moz-fit-content;width:-webkit-fit-content;width:fit-content}@media (min-width: 720px){.spec-note{min-width:416px}}.spec-note>a:first-child{color:var(--color-spec-note-first-link);display:block;font:italic 11pt/18pt var(--font-family);opacity:.6;user-select:none}.spec-todo{color:var(--color-spec-todo);margin:1em 0 1em 5em;min-height:1em}.spec-todo::before{content:"todo";display:block;float:left;margin-left:-5em;text-transform:uppercase}.spec-index ol{list-style-type:none;margin:0 0 0 var(--indent);padding:0;column-width:210px;column-gap:var(--indent)}.spec-index ol li{width:min-content;white-space:nowrap}pre,code{font-family:var(--font-family-monospace);font-size:var(--mono-font-size);font-weight:inherit}code{background:var(--color-code-background);margin:-2px -1px;padding:3px 3px;white-space:pre-wrap}pre>code{background:none;font-weight:inherit;margin:0;padding:0;white-space:pre}pre{background:var(--color-pre-background);border-left:solid 4px var(--color-pre-border);margin:1rem -1rem;min-width:70vw;padding:12px 1rem 12px calc(1rem - 4px);width:-moz-fit-content;width:-webkit-fit-content;width:fit-content;max-width:calc(100vw - 2rem);overflow-y:auto}@media (min-width: 720px){pre{min-width:40ch}}.spec-example{background:var(--color-spec-example);border-left:solid 4px var(--color-spec-example-border);padding-top:8px}.spec-counter-example{background:var(--color-spec-counter-example);border-left:solid 4px var(--color-spec-counter-border);padding-top:8px}.spec-example>a,.spec-counter-example>a{display:block;font:italic 11pt/18pt var(--font-family);opacity:.6;user-select:none}.spec-counter-example>a{color:var(--color-spec-counter-example-link)}table{border-collapse:collapse}th{background-color:var(--color-table-header)}td,th{border:1px solid var(--color-table-header-border);padding:.4em;vertical-align:baseline}ol,ul{padding-left:var(--list-indent)}li>ol,li>ul{margin-top:.25em;margin-bottom:.5em}li+li{margin-top:.25em}li.task{list-style-type:none;position:relative}li.task>input:first-child{margin-left:0;position:absolute;transform:translateX(calc(-100% - 1ch))}ins{background-color:var(--color-inserts-background);text-decoration:none}del{background-color:var(--color-deletions-background)}.spec-added,.spec-removed{border-left:4px solid;margin-left:-18px;padding-left:14px}.spec-added{border-color:var(--color-spec-added-border)}.spec-removed{border-color:var(--color-spec-removed-border);text-decoration:line-through}.spec-keyword{font-weight:bold}.spec-string{font-family:var(--font-family-monospace);font-size:85%;white-space:pre}var{font-style:italic}*[data-name]{transition:.15s background ease-out;border-radius:2px;padding:0 3px;margin:0 -3px}.spec-semantic,.spec-algo{margin:1rem 0 1rem var(--dfn-indent)}.spec-semantic>.spec-nt::after,.spec-algo>.spec-call:first-child::after{content:":";font-style:normal;font-weight:bold;margin-left:1ex}.spec-semantic ol,.spec-semantic ol ol ol ol,.spec-algo ol,.spec-algo ol ol ol ol{list-style-type:decimal}.spec-semantic ol ol,.spec-semantic ol ol ol ol ol,.spec-algo ol ol,.spec-algo ol ol ol ol ol{list-style-type:lower-alpha}.spec-semantic ol ol ol,.spec-semantic ol ol ol ol ol ol,.spec-algo ol ol ol,.spec-algo ol ol ol ol ol ol{list-style-type:lower-roman}.spec-call>a{color:inherit}.spec-production{margin:1rem 0 1rem var(--dfn-indent)}.spec-production>.spec-nt::after{content:":";font-style:normal;font-weight:bold;margin:0 1ex}.spec-semantic.d2>.spec-nt::after,.spec-production.d2>.spec-nt::after{content:"::"}.spec-semantic.d3>.spec-nt::after,.spec-production.d3>.spec-nt::after{content:":::"}.spec-production>.spec-rhs{line-height:1.1;margin:.25em 0 .5em calc(2 * var(--indent));text-indent:calc(-1 * var(--indent))}.spec-semantic>.spec-rhs{display:inline-block;text-indent:calc(-1 * var(--indent));margin-left:calc(1ex + var(--indent))}.spec-rhs>*{text-indent:0}.spec-oneof{display:inline}.spec-oneof::before{content:"one of";font-style:normal;font-weight:bold}.spec-oneof-grid{max-width:calc(100vw - 2rem);overflow:auto;margin:-1ex -1rem;padding:1ex 1rem}.spec-oneof-grid>table{margin-left:var(--indent)}.spec-oneof .spec-rhs{border:none;margin:0;padding:0 0 0 1rem;vertical-align:baseline;white-space:pre}.spec-oneof .spec-rhs:first-child{padding:0}.spec-rhs .spec-constrained:not(:first-child),.spec-rhs .spec-quantified:not(:first-child),.spec-rhs .spec-nt:not(:first-child),.spec-rhs .spec-t:not(:first-child),.spec-rhs .spec-rx:not(:first-child),.spec-rhs .spec-prose:not(:first-child),.spec-rhs .spec-empty:not(:first-child),.spec-rhs .spec-lookahead:not(:first-child){margin-left:1ex;display:inline-block}.spec-condition{font-size:85%}.spec-condition::before{content:"[if "}.spec-condition.not::before{content:"[if not "}.spec-condition::after{content:"]"}.spec-empty,.spec-prose{color:var(--color-spec-prose)}.spec-nt{font-style:italic}.spec-nt>a{color:inherit}.spec-quantifiers,.spec-params{font-size:65%;font-style:normal;vertical-align:sub}.spec-quantifier.list{color:var(--color-spec-quantifier-list)}.spec-quantifier.optional{color:var(--color-spec-quantifier-optional)}.spec-params,.spec-condition{color:var(--color-spec-condition)}.spec-params::before{content:"["}.spec-params::after{content:"]"}.spec-quantifier:not(:last-child)::after,.spec-param:not(:last-child)::after{color:var(--color-spec-param);content:", "}.spec-param.conditional::before{content:"?"}.spec-param.negated::before{content:"!"}.spec-t,.spec-rx{color:var(--color-spec-rx);font-family:var(--font-family-monospace);font-weight:bold}.spec-butnot::before{color:var(--color-grey);content:"but not";font-family:var(--font-family);font-weight:normal;margin-right:1ex}.spec-butnot>*:not(:first-child)::before{color:var(--color-grey);content:"or";font-family:var(--font-family);font-weight:normal;margin-right:1ex}.spec-rhs .spec-oneof::before,.spec-rhs .spec-butnot::before{margin-left:1ex}.spec-lookahead>*{margin:0!important}.spec-lookahead>*:not(:first-child)::before{color:var(--color-grey);content:", ";font-family:var(--font-family);font-style:normal;font-weight:normal}.spec-lookahead::before{color:var(--color-grey);content:"[lookahead = ";font-family:var(--font-family);font-style:normal;font-weight:normal}.spec-lookahead.not::before{content:"[lookahead \2260  "}.spec-lookahead.set::before{content:"[lookahead \2208  {";margin-right:0}.spec-lookahead.set.not::before{content:"[lookahead \2209  {"}.spec-lookahead.ntset::before{content:"[lookahead \2208  ";margin-right:0}.spec-lookahead.ntset.not::before{content:"[lookahead \2209  "}.spec-lookahead::after{color:var(--color-grey);content:"]"}.spec-lookahead.set::after{content:"}]"}code[class*=language-],pre[class*=language-]{color:var(--color-prism-foreground);background:none;text-shadow:0 1px var(--color-prism-text-shadow);font-family:var(--font-family-monospace);font-size:1em;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]::-moz-selection,pre[class*=language-] ::-moz-selection,code[class*=language-]::-moz-selection,code[class*=language-] ::-moz-selection{text-shadow:none;background:var(--color-prism-background)}pre[class*=language-]::selection,pre[class*=language-] ::selection,code[class*=language-]::selection,code[class*=language-] ::selection{text-shadow:none;background:var(--color-prism-background)}@media print{code[class*=language-],pre[class*=language-]{text-shadow:none}}pre[class*=language-]{padding:1em;margin:.5em 0;overflow:auto}:not(pre)>code[class*=language-],pre[class*=language-]{background:var(--color-prism-block-background)}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal}.token.atrule,.token.attr-value,.token.keyword,.token.property,.token.selector,.token.attr-name,.token.builtin,.token.entity,.token.url,.token.inserted{color:var(--color-token-inserted);background:none}.token.tag,.token.boolean,.token.number,.token.string,.token.char,.token.constant,.token.symbol,.token.regex,.token.important,.token.variable,.token.function,.token.class-name,.token.deleted{color:var(--color-token-deleted)}.token.comment,.token.prolog,.token.doctype,.token.cdata,.token.description{color:inherit;opacity:.3}.token.punctuation{color:inherit;opacity:.5}.token.operator,.token.namespace{color:inherit;opacity:.7}</style>
 <script>(function(){var r,a=[];document.addEventListener("readystatechange",function(){document.readyState==="interactive"&&u()});function u(){var n=document.querySelector('label[for="spec-sidebar-toggle"]');n.addEventListener("scroll",o),n.addEventListener("touchmove",o);function o(d){d.preventDefault()}for(var t=document.getElementsByTagName("section"),e=0;e<t.length;e++)t[e].getAttribute("secid")&&a.push(t[e]);var i=window.scrollY,c=!1;window.addEventListener("scroll",function(d){i=window.scrollY,c||(c=!0,window.requestAnimationFrame(function(){s(i),c=!1}))})}function s(n){for(var o=n+document.documentElement.clientHeight/4,t,e=a.length-1;e>=0;e--)if(a[e].offsetTop<o){t=a[e];break}var i=t&&t.getAttribute("secid");i!==r&&(r&&l(r,!1),i&&l(i,!0),r=i)}function l(n,o){document.getElementById("_sidebar_"+n).className=o?"viewing":"";for(var t=n.split(".");t.length;){var e=document.getElementById("_toggle_"+t.join("."));e&&(e.checked=o),t.pop()}}s(window.scrollY);})();</script>
 <script>(function(){var n=document.getElementsByTagName("style")[0].sheet,e;function u(){e&&(n.deleteRule(e),e=void 0)}function d(t){u(),e=n.insertRule('*[data-name="'+t+'"] { background: rgba(230,215,0,0.12); }',n.cssRules.length)}document.documentElement.addEventListener("mouseover",function(t){var a=t.target.attributes["data-name"];a&&d(a.value)});document.documentElement.addEventListener("mouseout",u);})();</script>
@@ -10,81 +10,487 @@
 </head>
 <body><article>
 <header>
-<h1>L0002 User Manual</h1>
+<h1>Graffiticode Language Specification</h1>
 <section id="intro">
-<section id="sec-Introduction" class="subsec">
-<h6><a href="#sec-Introduction" title="link to this subsection">Introduction</a></h6>
-<p><em>Graffiticode</em> is a collection of domain languages used for creating task specific web apps. <strong>L0002</strong> is a <em>Graffiticode</em> language for writing &lsquo;hello, world&rsquo; web apps.</p>
-<p>L0002 can be used as a template for creating other, presumably more interesting and useful, languages.</p>
-</section>
+<p>This document formally specifies the Graffiticode language, a functional programming language with OCaml-like syntax.</p>
+<p><strong>Version:</strong> 1.0.0 <strong>Status:</strong> Draft <strong>Date:</strong> March 26, 2025 </p>
 </section>
 <nav class="spec-toc">
 <div class="title">Contents</div>
 <ol>
-<li><a href="#sec-Overview"><span class="spec-secid">1</span>Overview</a></li>
-<li><a href="#sec-Vocabulary"><span class="spec-secid">2</span>Vocabulary</a></li>
+<li><a href="#sec-Introduction"><span class="spec-secid">1</span>Introduction</a><ol>
+<li><a href="#sec-Design-Goals"><span class="spec-secid">1.1</span>Design Goals</a></li>
+</ol>
+</li>
+<li><a href="#sec-Lexical-Structure"><span class="spec-secid">2</span>Lexical Structure</a><ol>
+<li><a href="#sec-Comments"><span class="spec-secid">2.1</span>Comments</a></li>
+<li><a href="#sec-Whitespace"><span class="spec-secid">2.2</span>Whitespace</a></li>
+<li><a href="#sec-Identifiers"><span class="spec-secid">2.3</span>Identifiers</a></li>
+<li><a href="#sec-Keywords"><span class="spec-secid">2.4</span>Keywords</a></li>
+<li><a href="#sec-Lexical-Structure.Literals"><span class="spec-secid">2.5</span>Literals</a><ol>
+<li><a href="#sec-Integer-Literals"><span class="spec-secid">2.5.1</span>Integer Literals</a></li>
+<li><a href="#sec-String-Literals"><span class="spec-secid">2.5.2</span>String Literals</a></li>
+<li><a href="#sec-Boolean-Literals"><span class="spec-secid">2.5.3</span>Boolean Literals</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a href="#sec-Types"><span class="spec-secid">3</span>Types</a><ol>
+<li><a href="#sec-Primitive-Types"><span class="spec-secid">3.1</span>Primitive Types</a></li>
+<li><a href="#sec-Composite-Types"><span class="spec-secid">3.2</span>Composite Types</a><ol>
+<li><a href="#sec-Lists"><span class="spec-secid">3.2.1</span>Lists</a></li>
+<li><a href="#sec-Records"><span class="spec-secid">3.2.2</span>Records</a></li>
+</ol>
+</li>
+<li><a href="#sec-Function-Types"><span class="spec-secid">3.3</span>Function Types</a></li>
+</ol>
+</li>
+<li><a href="#sec-Expressions"><span class="spec-secid">4</span>Expressions</a><ol>
+<li><a href="#sec-Variables"><span class="spec-secid">4.1</span>Variables</a></li>
+<li><a href="#sec-Expressions.Literals"><span class="spec-secid">4.2</span>Literals</a></li>
+<li><a href="#sec-List-Indexing"><span class="spec-secid">4.3</span>List Indexing</a></li>
+<li><a href="#sec-Record-Field-Access"><span class="spec-secid">4.4</span>Record Field Access</a></li>
+<li><a href="#sec-Conditional-Expressions"><span class="spec-secid">4.5</span>Conditional Expressions</a></li>
+<li><a href="#sec-Function-Application"><span class="spec-secid">4.6</span>Function Application</a></li>
+</ol>
+</li>
+<li><a href="#sec-Statements"><span class="spec-secid">5</span>Statements</a><ol>
+<li><a href="#sec-Let-Declarations"><span class="spec-secid">5.1</span>Let Declarations</a></li>
+</ol>
+</li>
+<li><a href="#sec-Functions"><span class="spec-secid">6</span>Functions</a><ol>
+<li><a href="#sec-Lambda-Expressions"><span class="spec-secid">6.1</span>Lambda Expressions</a></li>
+<li><a href="#sec-Function-Parameters"><span class="spec-secid">6.2</span>Function Parameters</a></li>
+<li><a href="#sec-Recursion"><span class="spec-secid">6.3</span>Recursion</a></li>
+</ol>
+</li>
+<li><a href="#sec-Higher-Order-Functions"><span class="spec-secid">7</span>Higher-Order Functions</a><ol>
+<li><a href="#sec-Common-Higher-Order-Functions"><span class="spec-secid">7.1</span>Common Higher-Order Functions</a><ol>
+<li><a href="#sec-Map"><span class="spec-secid">7.1.1</span>Map</a></li>
+<li><a href="#sec-Filter"><span class="spec-secid">7.1.2</span>Filter</a></li>
+<li><a href="#sec-Reduce"><span class="spec-secid">7.1.3</span>Reduce</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li><a href="#sec-Operators"><span class="spec-secid">8</span>Operators</a><ol>
+<li><a href="#sec-Arithmetic-Operators"><span class="spec-secid">8.1</span>Arithmetic Operators</a></li>
+<li><a href="#sec-Comparison-Operators"><span class="spec-secid">8.2</span>Comparison Operators</a></li>
+<li><a href="#sec-Logical-Operators"><span class="spec-secid">8.3</span>Logical Operators</a></li>
+</ol>
+</li>
+<li><a href="#sec-Execution-Model"><span class="spec-secid">9</span>Execution Model</a><ol>
+<li><a href="#sec-Evaluation-Strategy"><span class="spec-secid">9.1</span>Evaluation Strategy</a></li>
+<li><a href="#sec-Scope-Rules"><span class="spec-secid">9.2</span>Scope Rules</a></li>
+<li><a href="#sec-First-Class-Functions"><span class="spec-secid">9.3</span>First-Class Functions</a></li>
+</ol>
+</li>
+<li><a href="#sec-Examples"><span class="spec-secid">10</span>Examples</a><ol>
+<li><a href="#sec-Basic-Examples"><span class="spec-secid">10.1</span>Basic Examples</a></li>
+<li><a href="#sec-Advanced-Examples"><span class="spec-secid">10.2</span>Advanced Examples</a></li>
+<li><a href="#sec-Real-World-Example-Data-Processing"><span class="spec-secid">10.3</span>Real-World Example: Data Processing</a></li>
+</ol>
+</li>
+<li><a href="#sec-Formal-Grammar"><span class="spec-secid">11</span>Formal Grammar</a></li>
+<li><a href="#sec-Future-Considerations"><span class="spec-secid">12</span>Future Considerations</a></li>
+<li><a href="#index"><span class="spec-secid">§</span>Index</a></li>
 </ol>
 </nav>
 </header>
-<section id="sec-Overview" secid="1">
-<h1><span class="spec-secid" title="link to this section"><a href="#sec-Overview">1</a></span>Overview</h1>
-<p>The code</p>
-<pre><code>hello "world"..
-</code></pre>
-<p>renders</p>
-<p>| <strong>hello, world!</strong></p>
-<p>in the browser view.</p>
+<section id="sec-Introduction" secid="1">
+<h1><span class="spec-secid" title="link to this section"><a href="#sec-Introduction">1</a></span>Introduction</h1>
+<p>Graffiticode is a functional programming language designed for [primary purpose/applications]. It features a clean, expressive syntax inspired by OCaml and emphasizes immutability, first-class functions, and composability.</p>
+<section id="sec-Design-Goals" secid="1.1">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Design-Goals">1.1</a></span>Design Goals</h2>
+<ol>
+<li>Simplicity: Minimal syntax with powerful semantics</li>
+<li>Expressiveness: Concise code that clearly communicates intent</li>
+<li>Functional: First-class functions, immutability, and composition</li>
+<li>Practical: Suitable for real-world programming tasks</li>
+</ol>
 </section>
-<section id="sec-Vocabulary" secid="2">
-<h1><span class="spec-secid" title="link to this section"><a href="#sec-Vocabulary">2</a></span>Vocabulary</h1>
-<table>
-<thead>
-<tr>
-<th>Function</th>
-<th align="center">Arity</th>
-<th>Example</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>hello</strong></td>
-<td align="center">1</td>
-<td><code>hello "world"</code></td>
-<td>renders <strong>hello, world!</strong> in the form</td>
-</tr>
-<tr>
-<td><strong>val</strong></td>
-<td align="center">2</td>
-<td><code>val ob "x"</code></td>
-<td>returns the value of <code>x</code> in <code>ob</code></td>
-</tr>
-<tr>
-<td><strong>concat</strong></td>
-<td align="center">1</td>
-<td><code>concat [x,y]</code></td>
-<td>returns the string value that is the concatentation of the values of x and y</td>
-</tr>
-<tr>
-<td><strong>add</strong></td>
-<td align="center">2</td>
-<td><code>add x y</code></td>
-<td>returns the sum of values of <code>x</code> and <code>y</code></td>
-</tr>
-<tr>
-<td><strong>map</strong></td>
-<td align="center">2</td>
-<td><code>map fn [1,2,3]</code></td>
-<td>returns a list containing the result of applying <code>fn</code> to each element in the list <code>[1,2,3]</code></td>
-</tr>
-<tr>
-<td><strong>data</strong></td>
-<td align="center">1</td>
-<td><code>data ob</code></td>
-<td>returns the value of data passed to the current task, or otherwise the value of <code>ob</code></td>
-</tr>
-</tbody>
-</table>
+</section>
+<section id="sec-Lexical-Structure" secid="2">
+<h1><span class="spec-secid" title="link to this section"><a href="#sec-Lexical-Structure">2</a></span>Lexical Structure</h1>
+<section id="sec-Comments" secid="2.1">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Comments">2.1</a></span>Comments</h2>
+<p>Line comments begin with <code>//</code> and continue to the end of the line:</p>
+<pre><code>// This is a comment
+let x = 42  // This is also a comment
+</code></pre>
+</section>
+<section id="sec-Whitespace" secid="2.2">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Whitespace">2.2</a></span>Whitespace</h2>
+<p>Whitespace (spaces, tabs, newlines) is insignificant except to separate tokens and for indentation in certain constructs.</p>
+</section>
+<section id="sec-Identifiers" secid="2.3">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Identifiers">2.3</a></span>Identifiers</h2>
+<p>Identifiers are used for variable and function names. They must begin with a letter and can contain letters, digits, and underscores.</p>
+<div class="spec-production" id="Syntax">
+<span class="spec-nt"><a href="#Syntax" data-name="Syntax">Syntax</a></span><div class="spec-rhs"><span class="spec-t">identifier ::= letter (letter | digit | '_')*</span></div>
+</div>
+<div class="spec-production" id="Examples">
+<span class="spec-nt"><a href="#Examples" data-name="Examples">Examples</a></span><div class="spec-rhs"><span class="spec-t">x add calculate_total myVar123</span></div>
+</div>
+</section>
+<section id="sec-Keywords" secid="2.4">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Keywords">2.4</a></span>Keywords</h2>
+<p>The following are reserved keywords in Graffiticode:</p>
+<pre><code>let
+case
+match
+</code></pre>
+</section>
+<section id="sec-Lexical-Structure.Literals" secid="2.5">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Lexical-Structure.Literals">2.5</a></span>Literals</h2>
+<section id="sec-Integer-Literals" secid="2.5.1">
+<h3><span class="spec-secid" title="link to this section"><a href="#sec-Integer-Literals">2.5.1</a></span>Integer Literals</h3>
+<div class="spec-production" id="Syntax">
+<span class="spec-nt"><a href="#Syntax" data-name="Syntax">Syntax</a></span><div class="spec-rhs"><span class="spec-t">integer ::= digit+</span></div>
+</div>
+<div class="spec-production" id="Examples">
+<span class="spec-nt"><a href="#Examples" data-name="Examples">Examples</a></span><div class="spec-rhs"><span class="spec-t">0 42 123456</span></div>
+</div>
+</section>
+<section id="sec-String-Literals" secid="2.5.2">
+<h3><span class="spec-secid" title="link to this section"><a href="#sec-String-Literals">2.5.2</a></span>String Literals</h3>
+<p>Strings are enclosed in double quotes.</p>
+<div class="spec-production" id="Syntax">
+<span class="spec-nt"><a href="#Syntax" data-name="Syntax">Syntax</a></span><div class="spec-rhs"><span class="spec-t">string ::= '"' character* '"'</span></div>
+</div>
+<div class="spec-production" id="Examples">
+<span class="spec-nt"><a href="#Examples" data-name="Examples">Examples</a></span><div class="spec-rhs"><span class="spec-t">"hello" "Graffiticode is awesome!" "123"</span></div>
+</div>
+</section>
+<section id="sec-Boolean-Literals" secid="2.5.3">
+<h3><span class="spec-secid" title="link to this section"><a href="#sec-Boolean-Literals">2.5.3</a></span>Boolean Literals</h3>
+<p>Boolean values are represented using integers where <code>0</code> is false and non-zero values (typically <code>1</code>) are true.</p>
+</section>
+</section>
+</section>
+<section id="sec-Types" secid="3">
+<h1><span class="spec-secid" title="link to this section"><a href="#sec-Types">3</a></span>Types</h1>
+<p>Graffiticode uses a dynamic type system. Values have types, but variables and parameters are not explicitly typed.</p>
+<section id="sec-Primitive-Types" secid="3.1">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Primitive-Types">3.1</a></span>Primitive Types</h2>
+<pre><code> **Number**: Represents integer and floating-point numbers
+ **String**: Represents text data
+ **Boolean**: Represented as integers where 0 is false and non-zero is true</code></pre>
+</section>
+<section id="sec-Composite-Types" secid="3.2">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Composite-Types">3.2</a></span>Composite Types</h2>
+<section id="sec-Lists" secid="3.2.1">
+<h3><span class="spec-secid" title="link to this section"><a href="#sec-Lists">3.2.1</a></span>Lists</h3>
+<p>Lists are ordered collections of values that can be of any type.</p>
+<div class="spec-production" id="Syntax">
+<span class="spec-nt"><a href="#Syntax" data-name="Syntax">Syntax</a></span><div class="spec-rhs"><span class="spec-t">list ::= '[' expression (',' expression)* ']'        | '[]'  // Empty list</span></div>
+</div>
+<div class="spec-production" id="Examples">
+<span class="spec-nt"><a href="#Examples" data-name="Examples">Examples</a></span><div class="spec-rhs"><span class="spec-t">[] [1, 2, 3] ["hello", "world"] [1, "two", [3, 4]]</span></div>
+</div>
+</section>
+<section id="sec-Records" secid="3.2.2">
+<h3><span class="spec-secid" title="link to this section"><a href="#sec-Records">3.2.2</a></span>Records</h3>
+<p>Records are collections of key-value pairs.</p>
+<div class="spec-production" id="Syntax">
+<span class="spec-nt"><a href="#Syntax" data-name="Syntax">Syntax</a></span><div class="spec-rhs"><span class="spec-t">record ::= '{' (identifier ':' expression (',' identifier ':' expression)*)? '}'</span></div>
+</div>
+<div class="spec-production" id="Examples">
+<span class="spec-nt"><a href="#Examples" data-name="Examples">Examples</a></span><div class="spec-rhs"><span class="spec-t">{} {x: 10, y: 20} {name: "Alice", age: 30, active: 1}</span></div>
+</div>
+</section>
+</section>
+<section id="sec-Function-Types" secid="3.3">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Function-Types">3.3</a></span>Function Types</h2>
+<p>Function types are not explicitly declared but are inferred from lambda expressions.</p>
+</section>
+</section>
+<section id="sec-Expressions" secid="4">
+<h1><span class="spec-secid" title="link to this section"><a href="#sec-Expressions">4</a></span>Expressions</h1>
+<section id="sec-Variables" secid="4.1">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Variables">4.1</a></span>Variables</h2>
+<p>Variables refer to values bound using <code>let</code> declarations.</p>
+<div class="spec-production" id="Examples">
+<span class="spec-nt"><a href="#Examples" data-name="Examples">Examples</a></span><div class="spec-rhs"><span class="spec-t">x counter myFunction</span></div>
+</div>
+</section>
+<section id="sec-Expressions.Literals" secid="4.2">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Expressions.Literals">4.2</a></span>Literals</h2>
+<p>Literals represent fixed values as described in the Literals section.</p>
+</section>
+<section id="sec-List-Indexing" secid="4.3">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-List-Indexing">4.3</a></span>List Indexing</h2>
+<p>List elements are accessed using zero-based indexing with square brackets.</p>
+<div class="spec-production" id="Syntax">
+<span class="spec-nt"><a href="#Syntax" data-name="Syntax">Syntax</a></span><div class="spec-rhs"><span class="spec-t">indexing ::= expression '[' expression ']'</span></div>
+</div>
+<div class="spec-production" id="Examples">
+<span class="spec-nt"><a href="#Examples" data-name="Examples">Examples</a></span><div class="spec-rhs"><span class="spec-t">numbers[0] matrix[i][j]</span></div>
+</div>
+</section>
+<section id="sec-Record-Field-Access" secid="4.4">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Record-Field-Access">4.4</a></span>Record Field Access</h2>
+<p>Record fields are accessed using dot notation.</p>
+<div class="spec-production" id="Syntax">
+<span class="spec-nt"><a href="#Syntax" data-name="Syntax">Syntax</a></span><div class="spec-rhs"><span class="spec-t">field-access ::= expression '.' identifier</span></div>
+</div>
+<div class="spec-production" id="Examples">
+<span class="spec-nt"><a href="#Examples" data-name="Examples">Examples</a></span><div class="spec-rhs"><span class="spec-t">person.name point.x</span></div>
+</div>
+</section>
+<section id="sec-Conditional-Expressions" secid="4.5">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Conditional-Expressions">4.5</a></span>Conditional Expressions</h2>
+<p>Conditional expressions use the ternary operator syntax.</p>
+<div class="spec-production" id="Syntax">
+<span class="spec-nt"><a href="#Syntax" data-name="Syntax">Syntax</a></span><div class="spec-rhs"><span class="spec-t">conditional ::= expression '?' expression ':' expression</span></div>
+</div>
+<div class="spec-production" id="Examples">
+<span class="spec-nt"><a href="#Examples" data-name="Examples">Examples</a></span><div class="spec-rhs"><span class="spec-t">x &gt; 0 ? "positive" : "non-positive" isEmpty ? [] : list[0]</span></div>
+</div>
+</section>
+<section id="sec-Function-Application" secid="4.6">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Function-Application">4.6</a></span>Function Application</h2>
+<p>Functions are applied by listing the function followed by its arguments.</p>
+<div class="spec-production" id="Syntax">
+<span class="spec-nt"><a href="#Syntax" data-name="Syntax">Syntax</a></span><div class="spec-rhs"><span class="spec-t">application ::= expression expression+</span></div>
+</div>
+<div class="spec-production" id="Examples">
+<span class="spec-nt"><a href="#Examples" data-name="Examples">Examples</a></span><div class="spec-rhs"><span class="spec-t">add 3 4 map double numbers</span></div>
+</div>
+</section>
+</section>
+<section id="sec-Statements" secid="5">
+<h1><span class="spec-secid" title="link to this section"><a href="#sec-Statements">5</a></span>Statements</h1>
+<section id="sec-Let-Declarations" secid="5.1">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Let-Declarations">5.1</a></span>Let Declarations</h2>
+<p>Let declarations bind values to identifiers.</p>
+<div class="spec-production" id="Syntax">
+<span class="spec-nt"><a href="#Syntax" data-name="Syntax">Syntax</a></span><div class="spec-rhs"><span class="spec-t">let-declaration ::= 'let' identifier '=' expression</span></div>
+</div>
+<div class="spec-production" id="Examples">
+<span class="spec-nt"><a href="#Examples" data-name="Examples">Examples</a></span><div class="spec-rhs"><span class="spec-t">let x = 42 let greeting = "hello" let add = &lt;a b: a + b&gt;</span></div>
+</div>
+</section>
+</section>
+<section id="sec-Functions" secid="6">
+<h1><span class="spec-secid" title="link to this section"><a href="#sec-Functions">6</a></span>Functions</h1>
+<section id="sec-Lambda-Expressions" secid="6.1">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Lambda-Expressions">6.1</a></span>Lambda Expressions</h2>
+<p>Lambda expressions define anonymous functions.</p>
+<div class="spec-production" id="Syntax">
+<span class="spec-nt"><a href="#Syntax" data-name="Syntax">Syntax</a></span><div class="spec-rhs"><span class="spec-t">lambda ::= '&lt;' parameter-list ':' expression '&gt;' parameter-list ::= identifier*</span></div>
+</div>
+<div class="spec-production" id="Examples">
+<span class="spec-nt"><a href="#Examples" data-name="Examples">Examples</a></span><div class="spec-rhs"><span class="spec-t">&lt;x: x + 1&gt; &lt;a b: a + b&gt; &lt;f g x: f g x&gt;</span></div>
+</div>
+</section>
+<section id="sec-Function-Parameters" secid="6.2">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Function-Parameters">6.2</a></span>Function Parameters</h2>
+<p>Function parameters are listed without delimiters or type annotations.</p>
+<div class="spec-production" id="Examples">
+<span class="spec-nt"><a href="#Examples" data-name="Examples">Examples</a></span><div class="spec-rhs"><span class="spec-t">&lt;x: x + x&gt;             // One parameter &lt;a b: a + b&gt;           // Two parameters &lt;fn acc arr: ...&gt;      // Three parameters</span></div>
+</div>
+</section>
+<section id="sec-Recursion" secid="6.3">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Recursion">6.3</a></span>Recursion</h2>
+<p>Functions can call themselves directly by name for recursion.</p>
+<div class="spec-production" id="Example">
+<span class="spec-nt"><a href="#Example" data-name="Example">Example</a></span><div class="spec-rhs"><span class="spec-t">let factorial = &lt;n: n &lt;= 1 ? 1 : n * factorial n - 1&gt;</span></div>
+</div>
+</section>
+</section>
+<section id="sec-Higher-Order-Functions" secid="7">
+<h1><span class="spec-secid" title="link to this section"><a href="#sec-Higher-Order-Functions">7</a></span>Higher-Order Functions</h1>
+<p>Graffiticode supports higher-order functions that can take functions as arguments and return functions as results.</p>
+<section id="sec-Common-Higher-Order-Functions" secid="7.1">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Common-Higher-Order-Functions">7.1</a></span>Common Higher-Order Functions</h2>
+<section id="sec-Map" secid="7.1.1">
+<h3><span class="spec-secid" title="link to this section"><a href="#sec-Map">7.1.1</a></span>Map</h3>
+<p>Applies a function to each element of a list.</p>
+<div class="spec-production" id="Example">
+<span class="spec-nt"><a href="#Example" data-name="Example">Example</a></span><div class="spec-rhs"><span class="spec-t">let map = &lt;fn arr: &lt;i: fn arr[i]&gt;&gt;</span></div>
+</div>
+</section>
+<section id="sec-Filter" secid="7.1.2">
+<h3><span class="spec-secid" title="link to this section"><a href="#sec-Filter">7.1.2</a></span>Filter</h3>
+<p>Selects elements from a list that satisfy a predicate.</p>
+<div class="spec-production" id="Example">
+<span class="spec-nt"><a href="#Example" data-name="Example">Example</a></span><div class="spec-rhs"><span class="spec-t">let filter = &lt;pred arr: &lt;i: pred arr[i] ? arr[i] : []&gt;&gt;</span></div>
+</div>
+</section>
+<section id="sec-Reduce" secid="7.1.3">
+<h3><span class="spec-secid" title="link to this section"><a href="#sec-Reduce">7.1.3</a></span>Reduce</h3>
+<p>Combines elements of a list into a single value.</p>
+<div class="spec-production" id="Example">
+<span class="spec-nt"><a href="#Example" data-name="Example">Example</a></span><div class="spec-rhs"><span class="spec-t">let reduce = &lt;fn acc arr: arr[] ? acc : reduce fn fn acc arr[0] arr[1:]&gt;</span></div>
+</div>
+</section>
+</section>
+</section>
+<section id="sec-Operators" secid="8">
+<h1><span class="spec-secid" title="link to this section"><a href="#sec-Operators">8</a></span>Operators</h1>
+<section id="sec-Arithmetic-Operators" secid="8.1">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Arithmetic-Operators">8.1</a></span>Arithmetic Operators</h2>
+<pre><code> `+`: Addition
+ `-`: Subtraction
+ `*`: Multiplication
+ `/`: Division
+ `%`: Modulo</code></pre>
+</section>
+<section id="sec-Comparison-Operators" secid="8.2">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Comparison-Operators">8.2</a></span>Comparison Operators</h2>
+<pre><code> `==`: Equal to
+ `!=`: Not equal to
+ `&lt;`: Less than
+ `&gt;`: Greater than
+ `&lt;=`: Less than or equal to
+ `&gt;=`: Greater than or equal to</code></pre>
+</section>
+<section id="sec-Logical-Operators" secid="8.3">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Logical-Operators">8.3</a></span>Logical Operators</h2>
+<pre><code> `&amp;&amp;`: Logical AND
+ `||`: Logical OR
+ `!`: Logical NOT</code></pre>
+</section>
+</section>
+<section id="sec-Execution-Model" secid="9">
+<h1><span class="spec-secid" title="link to this section"><a href="#sec-Execution-Model">9</a></span>Execution Model</h1>
+<section id="sec-Evaluation-Strategy" secid="9.1">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Evaluation-Strategy">9.1</a></span>Evaluation Strategy</h2>
+<p>Graffiticode uses eager (strict) evaluation for expressions.</p>
+</section>
+<section id="sec-Scope-Rules" secid="9.2">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Scope-Rules">9.2</a></span>Scope Rules</h2>
+<p>Graffiticode uses lexical scoping for variables. Variables are visible within the scope they are defined and any nested scopes.</p>
+</section>
+<section id="sec-First-Class-Functions" secid="9.3">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-First-Class-Functions">9.3</a></span>First-Class Functions</h2>
+<p>Functions are first-class values in Graffiticode. They can be: 	 Assigned to variables 	 Passed as arguments to other functions 	 Returned as results from functions 	 Stored in data structures</p>
+</section>
+</section>
+<section id="sec-Examples" secid="10">
+<h1><span class="spec-secid" title="link to this section"><a href="#sec-Examples">10</a></span>Examples</h1>
+<section id="sec-Basic-Examples" secid="10.1">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Basic-Examples">10.1</a></span>Basic Examples</h2>
+<pre><code>// Variable declarations
+let x = 42
+let greeting = "hello"
+
+// Lists
+let numbers = [1, 2, 3, 4, 5]
+let mixed = [1, "two", [3, 4]]
+
+// Records
+let point = {x: 10, y: 20}
+let person = {name: "Alice", age: 30}
+
+// Functions
+let identity = &lt;x: x&gt;
+let add = &lt;a b: a + b&gt;
+let double = &lt;x: x + x&gt;
+
+// Function application
+let result = add 3 4
+let doubled = double 21
+</code></pre>
+</section>
+<section id="sec-Advanced-Examples" secid="10.2">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Advanced-Examples">10.2</a></span>Advanced Examples</h2>
+<pre><code>// Higher-order functions
+let map = &lt;fn arr: &lt;i: fn arr[i]&gt;&gt;
+let filter = &lt;pred arr: &lt;i: pred arr[i] ? arr[i] : []&gt;&gt;
+let reduce = &lt;fn acc arr: arr[] ? acc : reduce fn fn acc arr[0] arr[1:]&gt;
+
+// Function composition
+let compose = &lt;f g x: f g x&gt;
+let addThenDouble = compose double add
+let result = addThenDouble 5 7  // double(add(5, 7)) = double(12) = 24
+
+// Recursive functions
+let factorial = &lt;n: n &lt;= 1 ? 1 : n * factorial n - 1&gt;
+</code></pre>
+</section>
+<section id="sec-Real-World-Example-Data-Processing" secid="10.3">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-Real-World-Example-Data-Processing">10.3</a></span>Real-World Example: Data Processing</h2>
+<pre><code>let products = [
+  {id: 1, name: "Laptop", price: 1200, stock: 5},
+  {id: 2, name: "Phone", price: 800, stock: 10},
+  {id: 3, name: "Tablet", price: 500, stock: 0},
+  {id: 4, name: "Headphones", price: 100, stock: 15}
+]
+
+// Filter in-stock items
+let inStock = &lt;item: item.stock &gt; 0&gt;
+let availableItems = filter inStock products
+
+// Apply 10% discount to each item
+let applyDiscount = &lt;item discount: {
+  id: item.id,
+  name: item.name,
+  price: item.price * (1 - discount),
+  stock: item.stock
+}&gt;
+let discountedItems = map &lt;item: applyDiscount item 0.1&gt; availableItems
+
+// Calculate total price
+let calculateTotal = &lt;items: 
+  reduce &lt;item total: total + item.price&gt; 0 items
+&gt;
+let total = calculateTotal discountedItems
+</code></pre>
+</section>
+</section>
+<section id="sec-Formal-Grammar" secid="11">
+<h1><span class="spec-secid" title="link to this section"><a href="#sec-Formal-Grammar">11</a></span>Formal Grammar</h1>
+<p>The following is a formal grammar for Graffiticode in modified BNF notation:</p>
+<pre><code>Program ::= Statement+ ".."
+
+Statement ::= LetDefinition | Lambda | List | Record | Identifier
+
+LetDefinition ::= "let" Identifier "=" Expression ".."
+
+Lambda ::= "&lt;" Identifier* ":" Expression "&gt;"
+
+List ::= "[" (Expression ("," Expression)*)? "]"
+
+Record ::= "{" (Identifier ":" Expression ("," Identifier ":" Expression)*)? "}"
+
+Expression ::= Lambda | List | Record | Identifier | Number | String
+             | Expression "[" Expression "]"             // List indexing
+             | Expression "." Identifier                 // Record field access
+             | Expression "?" Expression ":" Expression  // Conditional
+             | Expression Expression+                    // Function application
+             | Expression BinaryOperator Expression      // Binary operation
+
+Identifier ::= [a-zA-Z][a-zA-Z0-9_]*
+
+Number ::= [0-9]+
+
+String ::= "\"" .* "\""
+
+BinaryOperator ::= "+" | "-" | "*" | "/" | "%" | "==" | "!=" | "&lt;" | "&gt;" | "&lt;=" | "&gt;=" | "&amp;&amp;" | "||"
+</code></pre>
+</section>
+<section id="sec-Future-Considerations" secid="12">
+<h1><span class="spec-secid" title="link to this section"><a href="#sec-Future-Considerations">12</a></span>Future Considerations</h1>
+<p>The following features are being considered for future versions of the language:</p>
+<ol>
+<li><strong>Pattern Matching</strong>: A more comprehensive pattern matching system</li>
+<li><strong>Type Annotations</strong>: Optional type annotations for variables and functions</li>
+<li><strong>Modules</strong>: A module system for organizing code</li>
+<li><strong>Error Handling</strong>: Structured error handling mechanisms</li>
+</ol>
+<p>---</p>
+<p>This specification is subject to change as the language evolves. Please refer to the latest version for the most up-to-date information.</p>
+</section>
+<section id="index" secid="index" class="spec-index">
+<h1>
+<span class="spec-secid" title="link to the index"><a href="#index">§</a></span>Index</h1>
+<ol>
+<li><a href="#Example">Example</a></li>
+<li><a href="#Examples">Examples</a></li>
+<li><a href="#Syntax">Syntax</a></li>
+</ol>
 </section>
 </article>
 <footer>
@@ -92,9 +498,109 @@ Written in <a href="https://spec-md.com" target="_blank">Spec Markdown</a>.</foo
 <input hidden class="spec-sidebar-toggle" type="checkbox" id="spec-sidebar-toggle" aria-hidden /><label for="spec-sidebar-toggle" aria-hidden><div class="spec-sidebar-button">&#x2630;</div></label>
 <div class="spec-sidebar" aria-hidden>
 <div class="spec-toc">
-<div class="title"><a href="#">L0002 User Manual</a></div>
-<ol><li id="_sidebar_1"><a href="#sec-Overview"><span class="spec-secid">1</span>Overview</a></li>
-<li id="_sidebar_2"><a href="#sec-Vocabulary"><span class="spec-secid">2</span>Vocabulary</a></li>
+<div class="title"><a href="#">Graffiticode Language Specification</a></div>
+<ol><li id="_sidebar_1"><a href="#sec-Introduction"><span class="spec-secid">1</span>Introduction</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_1" /><label for="_toggle_1"></label>
+<ol>
+<li id="_sidebar_1.1"><a href="#sec-Design-Goals"><span class="spec-secid">1.1</span>Design Goals</a></li>
+</ol>
+</li>
+<li id="_sidebar_2"><a href="#sec-Lexical-Structure"><span class="spec-secid">2</span>Lexical Structure</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_2" /><label for="_toggle_2"></label>
+<ol>
+<li id="_sidebar_2.1"><a href="#sec-Comments"><span class="spec-secid">2.1</span>Comments</a></li>
+<li id="_sidebar_2.2"><a href="#sec-Whitespace"><span class="spec-secid">2.2</span>Whitespace</a></li>
+<li id="_sidebar_2.3"><a href="#sec-Identifiers"><span class="spec-secid">2.3</span>Identifiers</a></li>
+<li id="_sidebar_2.4"><a href="#sec-Keywords"><span class="spec-secid">2.4</span>Keywords</a></li>
+<li id="_sidebar_2.5"><a href="#sec-Lexical-Structure.Literals"><span class="spec-secid">2.5</span>Literals</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_2.5" /><label for="_toggle_2.5"></label>
+<ol>
+<li id="_sidebar_2.5.1"><a href="#sec-Integer-Literals"><span class="spec-secid">2.5.1</span>Integer Literals</a></li>
+<li id="_sidebar_2.5.2"><a href="#sec-String-Literals"><span class="spec-secid">2.5.2</span>String Literals</a></li>
+<li id="_sidebar_2.5.3"><a href="#sec-Boolean-Literals"><span class="spec-secid">2.5.3</span>Boolean Literals</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li id="_sidebar_3"><a href="#sec-Types"><span class="spec-secid">3</span>Types</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_3" /><label for="_toggle_3"></label>
+<ol>
+<li id="_sidebar_3.1"><a href="#sec-Primitive-Types"><span class="spec-secid">3.1</span>Primitive Types</a></li>
+<li id="_sidebar_3.2"><a href="#sec-Composite-Types"><span class="spec-secid">3.2</span>Composite Types</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_3.2" /><label for="_toggle_3.2"></label>
+<ol>
+<li id="_sidebar_3.2.1"><a href="#sec-Lists"><span class="spec-secid">3.2.1</span>Lists</a></li>
+<li id="_sidebar_3.2.2"><a href="#sec-Records"><span class="spec-secid">3.2.2</span>Records</a></li>
+</ol>
+</li>
+<li id="_sidebar_3.3"><a href="#sec-Function-Types"><span class="spec-secid">3.3</span>Function Types</a></li>
+</ol>
+</li>
+<li id="_sidebar_4"><a href="#sec-Expressions"><span class="spec-secid">4</span>Expressions</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_4" /><label for="_toggle_4"></label>
+<ol>
+<li id="_sidebar_4.1"><a href="#sec-Variables"><span class="spec-secid">4.1</span>Variables</a></li>
+<li id="_sidebar_4.2"><a href="#sec-Expressions.Literals"><span class="spec-secid">4.2</span>Literals</a></li>
+<li id="_sidebar_4.3"><a href="#sec-List-Indexing"><span class="spec-secid">4.3</span>List Indexing</a></li>
+<li id="_sidebar_4.4"><a href="#sec-Record-Field-Access"><span class="spec-secid">4.4</span>Record Field Access</a></li>
+<li id="_sidebar_4.5"><a href="#sec-Conditional-Expressions"><span class="spec-secid">4.5</span>Conditional Expressions</a></li>
+<li id="_sidebar_4.6"><a href="#sec-Function-Application"><span class="spec-secid">4.6</span>Function Application</a></li>
+</ol>
+</li>
+<li id="_sidebar_5"><a href="#sec-Statements"><span class="spec-secid">5</span>Statements</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_5" /><label for="_toggle_5"></label>
+<ol>
+<li id="_sidebar_5.1"><a href="#sec-Let-Declarations"><span class="spec-secid">5.1</span>Let Declarations</a></li>
+</ol>
+</li>
+<li id="_sidebar_6"><a href="#sec-Functions"><span class="spec-secid">6</span>Functions</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_6" /><label for="_toggle_6"></label>
+<ol>
+<li id="_sidebar_6.1"><a href="#sec-Lambda-Expressions"><span class="spec-secid">6.1</span>Lambda Expressions</a></li>
+<li id="_sidebar_6.2"><a href="#sec-Function-Parameters"><span class="spec-secid">6.2</span>Function Parameters</a></li>
+<li id="_sidebar_6.3"><a href="#sec-Recursion"><span class="spec-secid">6.3</span>Recursion</a></li>
+</ol>
+</li>
+<li id="_sidebar_7"><a href="#sec-Higher-Order-Functions"><span class="spec-secid">7</span>Higher-Order Functions</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_7" /><label for="_toggle_7"></label>
+<ol>
+<li id="_sidebar_7.1"><a href="#sec-Common-Higher-Order-Functions"><span class="spec-secid">7.1</span>Common Higher-Order Functions</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_7.1" /><label for="_toggle_7.1"></label>
+<ol>
+<li id="_sidebar_7.1.1"><a href="#sec-Map"><span class="spec-secid">7.1.1</span>Map</a></li>
+<li id="_sidebar_7.1.2"><a href="#sec-Filter"><span class="spec-secid">7.1.2</span>Filter</a></li>
+<li id="_sidebar_7.1.3"><a href="#sec-Reduce"><span class="spec-secid">7.1.3</span>Reduce</a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li id="_sidebar_8"><a href="#sec-Operators"><span class="spec-secid">8</span>Operators</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_8" /><label for="_toggle_8"></label>
+<ol>
+<li id="_sidebar_8.1"><a href="#sec-Arithmetic-Operators"><span class="spec-secid">8.1</span>Arithmetic Operators</a></li>
+<li id="_sidebar_8.2"><a href="#sec-Comparison-Operators"><span class="spec-secid">8.2</span>Comparison Operators</a></li>
+<li id="_sidebar_8.3"><a href="#sec-Logical-Operators"><span class="spec-secid">8.3</span>Logical Operators</a></li>
+</ol>
+</li>
+<li id="_sidebar_9"><a href="#sec-Execution-Model"><span class="spec-secid">9</span>Execution Model</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_9" /><label for="_toggle_9"></label>
+<ol>
+<li id="_sidebar_9.1"><a href="#sec-Evaluation-Strategy"><span class="spec-secid">9.1</span>Evaluation Strategy</a></li>
+<li id="_sidebar_9.2"><a href="#sec-Scope-Rules"><span class="spec-secid">9.2</span>Scope Rules</a></li>
+<li id="_sidebar_9.3"><a href="#sec-First-Class-Functions"><span class="spec-secid">9.3</span>First-Class Functions</a></li>
+</ol>
+</li>
+<li id="_sidebar_10"><a href="#sec-Examples"><span class="spec-secid">10</span>Examples</a>
+<input hidden class="toggle" type="checkbox" id="_toggle_10" /><label for="_toggle_10"></label>
+<ol>
+<li id="_sidebar_10.1"><a href="#sec-Basic-Examples"><span class="spec-secid">10.1</span>Basic Examples</a></li>
+<li id="_sidebar_10.2"><a href="#sec-Advanced-Examples"><span class="spec-secid">10.2</span>Advanced Examples</a></li>
+<li id="_sidebar_10.3"><a href="#sec-Real-World-Example-Data-Processing"><span class="spec-secid">10.3</span>Real-World Example: Data Processing</a></li>
+</ol>
+</li>
+<li id="_sidebar_11"><a href="#sec-Formal-Grammar"><span class="spec-secid">11</span>Formal Grammar</a></li>
+<li id="_sidebar_12"><a href="#sec-Future-Considerations"><span class="spec-secid">12</span>Future Considerations</a></li>
+<li id="_sidebar_index"><a href="#index"><span class="spec-secid">§</span>Index</a></li>
 </ol>
 </div>
 </div>

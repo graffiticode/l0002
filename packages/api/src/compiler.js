@@ -66,6 +66,23 @@ export class Transformer extends BasisTransformer {
       });
     });
   }
+
+  // CATCH_ALL(node, options, resume) {
+  //   console.log(
+  //     "L0002/CATCH_ALL()",
+  //     "nodePool=" + JSON.stringify(this.nodePool, null, 2),
+  //     "node=" + JSON.stringify(node, null, 2),
+  //   );
+  //   this.visit(node.elts[0], options, async (e0, v0) => {
+  //     const data = options?.data || {};
+  //     const err = e0;
+  //     const val = v0;
+  //     resume(err, {
+  //       ...val,
+  //       ...data,
+  //     });
+  //   });
+  // }
 }
 
 export const compiler = new BasisCompiler({
