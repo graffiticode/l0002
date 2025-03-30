@@ -10,6 +10,10 @@ function classNames(...classes) {
 function renderJSON(data) {
   delete data.schema;
   delete data.theme;
+  console.log(
+    "renderJSON()",
+    "data=" + JSON.stringify(data, null, 2),
+  );
   return (
     <pre className="text-xs">{JSON.stringify(data, null, 2)}</pre>
   );
@@ -17,7 +21,17 @@ function renderJSON(data) {
 
 function render({ state }) {
   const { data } = state;
-  if (typeof data?.hello === "string") {
+  console.log(
+    "render()",
+    "data=" + JSON.stringify(data, null, 2),
+  );
+  if (data?.print) {
+    if (typeof data.print === "string") {
+      return <span className="text-sm">{data.print}</span>;
+    } else {
+      return renderJSON(data.print);
+    }
+  } else if (typeof data?.hello === "string") {
     return <span className="text-sm">{`hello, ${data.hello}!`}</span>;
   } else if (typeof data.image === "string") {
     return <img src={data.image} />;

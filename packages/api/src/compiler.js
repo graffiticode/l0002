@@ -16,6 +16,15 @@ export class Checker extends BasisChecker {
 }
 
 export class Transformer extends BasisTransformer {
+  PRINT(node, options, resume) {
+    this.visit(node.elts[0], options, (e0, v0) => {
+      const err = e0;
+      const val = {
+        print: v0,
+      };
+      resume(err, val);
+    })
+  }
   HELLO(node, options, resume) {
     this.visit(node.elts[0], options, async (e0, v0) => {
       const data = options?.data || {};

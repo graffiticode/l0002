@@ -1,4 +1,10 @@
 window.gcexports.globalLexicon = {
+  "print" : {
+    "tk": 1,
+    "name": "PRINT",
+    "cls": "function",
+    "length": 1,
+  },
   "hello" : {
     "tk": 1,
     "name": "HELLO",
