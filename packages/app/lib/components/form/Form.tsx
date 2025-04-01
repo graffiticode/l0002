@@ -25,7 +25,7 @@ function render({ state }) {
     "render()",
     "data=" + JSON.stringify(data, null, 2),
   );
-  if (data?.print) {
+  if (data?.print !== undefined) {
     if (typeof data.print === "string") {
       return <span className="text-sm">{data.print}</span>;
     } else {
