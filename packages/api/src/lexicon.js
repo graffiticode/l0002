@@ -29,6 +29,12 @@ window.gcexports.globalLexicon = {
     "cls": "function",
     "length": 2,
   },
+  "set" : {
+    "tk": 1,
+    "name": "SET",
+    "cls": "function",
+    "length": 3,
+  },
   "nth" : {
     "tk": 1,
     "name": "NTH",
