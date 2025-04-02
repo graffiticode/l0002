@@ -84,5 +84,8 @@ window.gcexports.globalLexicon = {
   "in" : { "tk": 1, "name": "IN", "cls": "function", "length": 0, "arity": 0 },
   "arg" : { "tk": 1, "name": "ARG", "cls": "function", "length": 1, "arity": 1 },
   "data" : { "tk": 1, "name": "DATA", "cls": "function", "length": 1, "arity": 1 },
-  "json" : { "tk": 1, "name": "JSON", "cls": "function", "length": 1, "arity": 1 }
+  "json" : { "tk": 1, "name": "JSON", "cls": "function", "length": 1, "arity": 1 },
+  "eq" : { "tk": 1, "name": "EQ", "cls": "function", "length": 2, "arity": 2 },
+  "mod" : { "tk": 1, "name": "MOD", "cls": "function", "length": 2, "arity": 2 },
+  "range" : { "tk": 1, "name": "RANGE", "cls": "function", "length": 3, "arity": 3 }
 }
