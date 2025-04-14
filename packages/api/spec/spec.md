@@ -1,9 +1,14 @@
-# L0002, Graffiticode Language Specification
+# L0002 | Graffiticode Language Specification
 
 ## Overview
 Graffiticode is a purely functional, punctuation-light programming language
-designed for end-user scripting and task-specific automation. Programs compile
-to static data interpreted by an environment-specific runtime.
+designed for end-user programming of task specific Micro-SaaS applications.
+Programs compile to static data and interpreted by the Micro-SaaS runtime.
+
+L0002 is a dialect of Graffiticode. Dialects specialize Graffiticode with
+task specific builtin functions and runtimes. L0002 is a starter language
+with a dialect that includes support for two functions: `hello` and `theme`.
+
 
 ## Core Principles
 - Purely functional semantics
@@ -29,6 +34,15 @@ let greeting = "hello"..
 let greeted = "world"..
 print concat [greeting "," greeted "!"]..
 ```
+
+## Execution Model
+- All function applications are fully resolved at compile time
+- Compiled output contains no lambdas, only static data
+- Runtime may look up external data or perform side effects
+- Error handling:
+  - Syntax errors: handled by the parser
+  - Static errors: handled by the compiler
+  - Runtime errors: handled by asserts in the client code
 
 ## Comments
 Line comments begin with `|`. The `|` character and every other character
@@ -95,7 +109,6 @@ false
 null
 ```
 
-## Data Structures
 ### Lists
 List are denoted with brackets and space-separated elements (commas are optional).
 They are immutable and can be used with pattern matching and destructuring.
@@ -137,11 +150,34 @@ case {name: "Alice" age: 30} of
 end
 ```
 
-### Tuples
-Denoted as lists but used semantically for fixed-size, heterogeneous values.
+### Tags
+
+Graffiticode supports symbolic values called tags. Tags are arity-0 symbolic constants used to represent fixed states or options.
+
+A tag is any unbound identifier that is not defined by a let binding or built-in function.
+
+Tags are case-sensitive—`Red` and `red` are distinct.
 
 ```
-let pair = [10.2 20.3]..
+let status = Running..
+
+case status of
+  Running: "system is active"
+  Stopped: "system is halted"
+  Error: "system fault"
+end
+```
+
+In this example, Running, Stopped, and Error are all tags. The compiler recognizes them as such because they are not bound by a let and are not built-in.
+
+Tags are primarily used in pattern matching to define symbolic branches.
+
+*Note: The existence of this feature subverts the detection of misspelled names
+during parsing. Their detection is deferred to type checking when functions are
+matched to their arguments.*
+
+```
+prnt "hello"..  | Error: "extra tokens after 'prnt'"
 ```
 
 ## Functions
@@ -205,24 +241,28 @@ Must include both `then` and `else`. Always returns a value.
 if condition then expr1 else expr2
 ```
 
-## Built-in Functions
-### Print
+## Vocabulary
+
+### Base
+
+#### Print
 ```
 print "hello, world!"..
 ```
-### String Concatenation
+
+#### String Concatenation
 
 ```
 concat ["one" 2 "three"]  | Yields "one2three"
 ```
 
-### Arithmetic
+#### Arithmetic
 `add`, `sub`, `mul`, `div`, `mod`
 
-### Comparison
+#### Comparison
 `eq`, `ne`, `lt`, `le`, `gt`, `ge`
 
-### List Operations
+#### List Operations
 `hd`, `tl`
 
 `isEmpty`
@@ -235,7 +275,7 @@ concat ["one" 2 "three"]  | Yields "one2three"
 
 `range start end step`
 
-### Record/List Access
+#### Record/List Access
 Access to a member of a record or a list is through a string key and
 number key, respectively.
 
@@ -246,16 +286,38 @@ get {name: "Alice", age: 30} "age"
 set ["foo" "bar"] 2 "baz"  | Yields ["foo" "bar" "baz"]
 ```
 
-## Dialects
+### Dialect
 - Dialects define the available built-ins for a given task
 - Dialects are determined by the development environment
 
-## Execution Model
-- All function applications are fully resolved at compile time
-- Compiled output contains no lambdas, only static data
-- Runtime may look up external data or perform side effects
-- Error handling:
-  - Syntax errors: handled by the parser
-  - Static errors: handled by the compiler
-  - Runtime errors: handled by asserts in the client code
+#### hello
+Renders the text "hello, world!" in the view.
 
+```json
+{
+  name: "hello",
+  args: [
+    string
+  ]
+}
+```
+
+```
+hello "world"..
+```
+
+#### theme
+Selects the given theme and renders the theme toggle in the view to allow the
+user to change the theme.
+
+```
+{
+  name: "theme",
+  args: [
+    [dark|light]
+  ]
+}
+```
+```
+theme dark..
+```
