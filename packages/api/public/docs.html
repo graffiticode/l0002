@@ -180,8 +180,9 @@ end
 hash {name: "Alice" age: 30}
 </code></pre>
 <pre><code>case {name: "Alice" age: 30} of
-  {}: "no name given"
+  {}: "empty record"
   {name}: "hello, ${name}"
+  _: "no name given"
 end
 </code></pre>
 </section>
