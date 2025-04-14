@@ -3,97 +3,97 @@ window.gcexports.globalLexicon = {
     "tk": 1,
     "name": "PRINT",
     "cls": "function",
-    "length": 1,
+    "length": 1
   },
   "hello" : {
     "tk": 1,
     "name": "HELLO",
     "cls": "function",
-    "length": 1,
+    "length": 1
   },
   "image" : {
     "tk": 1,
     "name": "IMAGE",
     "cls": "function",
-    "length": 1,
+    "length": 1
   },
   "theme" : {
     "tk": 1,
     "name": "THEME",
     "cls": "function",
-    "length": 2,
+    "length": 2
   },
   "get" : {
     "tk": 1,
     "name": "GET",
     "cls": "function",
-    "length": 2,
+    "length": 2
   },
   "set" : {
     "tk": 1,
     "name": "SET",
     "cls": "function",
-    "length": 3,
+    "length": 3
   },
   "nth" : {
     "tk": 1,
     "name": "NTH",
     "cls": "function",
-    "length": 2,
+    "length": 2
   },
   "sub" : {
     "tk": 1,
     "name": "SUB",
     "cls": "function",
-    "length": 2,
+    "length": 2
   },
   "filter" : {
     "tk": 1,
     "name": "FILTER",
     "cls": "function",
-    "length": 2,
+    "length": 2
   },
   "reduce" : {
     "tk": 1,
     "name": "REDUCE",
     "cls": "function",
-    "length": 3,
+    "length": 3
   },
   "map" : {
     "tk": 1,
     "name": "MAP",
     "cls": "function",
-    "length": 2,
+    "length": 2
   },
   "lt" : {
     "tk": 1,
     "name": "LT",
     "cls": "function",
-    "length": 2,
+    "length": 2
   },
   "le" : {
     "tk": 1,
     "name": "LE",
     "cls": "function",
-    "length": 2,
+    "length": 2
   },
   "gt" : {
     "tk": 1,
     "name": "GT",
     "cls": "function",
-    "length": 2,
+    "length": 2
   },
   "ge" : {
     "tk": 1,
     "name": "GE",
     "cls": "function",
-    "length": 2,
+    "length": 2
   },
   "ne" : {
     "tk": 1,
     "name": "NE",
     "cls": "function",
-    "length": 2,
+    "length": 2
   },
   "val" : { "tk": 1, "name": "VAL", "cls": "function", "length": 2 , "arity": 2 },
   "key" : { "tk": 1, "name": "KEY", "cls": "function", "length": 2 , "arity": 2 },

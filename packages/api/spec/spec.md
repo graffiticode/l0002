@@ -1,476 +1,261 @@
-# Graffiticode Language Specification
+# L0002, Graffiticode Language Specification
 
-This document formally specifies the Graffiticode language, a functional programming language with OCaml-like syntax.
+## Overview
+Graffiticode is a purely functional, punctuation-light programming language
+designed for end-user scripting and task-specific automation. Programs compile
+to static data interpreted by an environment-specific runtime.
 
-**Version:** 1.0.0  
-**Status:** Draft  
-**Date:** March 26, 2025  
+## Core Principles
+- Purely functional semantics
+- Fixed arity for all functions
+- Prefix notation only (no infix operators)
+- Minimal punctuation; whitespace is only used as a token separator
+- Commas (in lists and records) and parens (around function applications) are
+  redundant but allows for human readability
+- Fully inferred static types (no type annotations)
+- Lambdas and function applications fully resolved at compile time
+- Compiled output is pure data; runtime handles side effects
 
-## Introduction
-
-Graffiticode is a functional programming language designed for [primary purpose/applications]. It features a clean, expressive syntax inspired by OCaml and emphasizes immutability, first-class functions, and composability.
-
-### Design Goals
-
-1. Simplicity: Minimal syntax with powerful semantics
-2. Expressiveness: Concise code that clearly communicates intent
-3. Functional: First-class functions, immutability, and composition
-4. Practical: Suitable for real-world programming tasks
-
-## Lexical Structure
-
-### Comments
-
-Line comments begin with `//` and continue to the end of the line:
+## Programs
+A program is one or more let declarations followed by a single expression
+terminated by the `..` token.
 
 ```
-// This is a comment
-let x = 42  // This is also a comment
+print "hello, world!"..
 ```
 
-### Whitespace
-
-Whitespace (spaces, tabs, newlines) is insignificant except to separate tokens and for indentation in certain constructs.
-
-### Identifiers
-
-Identifiers are used for variable and function names. They must begin with a letter and can contain letters, digits, and underscores.
-
-Syntax:
 ```
-identifier ::= letter (letter | digit | '_')*
+let greeting = "hello"..
+let greeted = "world"..
+print concat [greeting "," greeted "!"]..
 ```
 
-Examples:
-```
-x
-add
-calculate_total
-myVar123
-```
-
-### Keywords
-
-The following are reserved keywords in Graffiticode:
+## Comments
+Line comments begin with `|`. The `|` character and every other character
+between it and the end of the current line are ignored.
 
 ```
-let
-case
-match
+| This is a comment
+```
+```
+let x = 10..  | This is also a comment
 ```
 
-### Literals
+## Let Declarations
+Symbols are defined with expressions that begin with the `let` keyword and end
+with the `..` punctuation.
 
-#### Integer Literals
+```
+let x = 10..
+```
+```
+let plus = <x y: add x y>..
+```
 
-Syntax:
-```
-integer ::= digit+
-```
+## Values
+### Numbers
+Integers and floats (including negative numbers)
 
-Examples:
 ```
-0
 42
-123456
+```
+```
+-3.14
 ```
 
-#### String Literals
+### Strings
+Strings can be multiline and include embedded expressions.
 
-Strings are enclosed in double quotes.
-
-Syntax:
-```
-string ::= '"' character* '"'
-```
-
-Examples:
 ```
 "hello"
-"Graffiticode is awesome!"
-"123"
 ```
 
-#### Boolean Literals
+Strings can be multiline.
 
-Boolean values are represented using integers where `0` is false and non-zero values (typically `1`) are true.
-
-## Types
-
-Graffiticode uses a dynamic type system. Values have types, but variables and parameters are not explicitly typed.
-
-### Primitive Types
-
-	 **Number**: Represents integer and floating-point numbers
-	 **String**: Represents text data
-	 **Boolean**: Represented as integers where 0 is false and non-zero is true
-
-### Composite Types
-
-#### Lists
-
-Lists are ordered collections of values that can be of any type.
-
-Syntax:
 ```
-list ::= '[' expression (',' expression)* ']'
-       | '[]'  // Empty list
+'hello,
+world!'
+```
+```
+let x = "world"..
+`hello, ${x}!`
 ```
 
-Examples:
-```
-[]
-[1, 2, 3]
-["hello", "world"]
-[1, "two", [3, 4]]
-```
+### Booleans
 
-#### Records
-
-Records are collections of key-value pairs.
-
-Syntax:
 ```
-record ::= '{' (identifier ':' expression (',' identifier ':' expression)*)? '}'
+true
+```
+```
+false
 ```
 
-Examples:
+### Null
 ```
-{}
-{x: 10, y: 20}
-{name: "Alice", age: 30, active: 1}
+null
 ```
 
-### Function Types
+## Data Structures
+### Lists
+List are denoted with brackets and space-separated elements (commas are optional).
+They are immutable and can be used with pattern matching and destructuring.
 
-Function types are not explicitly declared but are inferred from lambda expressions.
-
-## Expressions
-
-### Variables
-
-Variables refer to values bound using `let` declarations.
-
-Examples:
 ```
-x
-counter
-myFunction
+[1 2 3]
 ```
-
-### Literals
-
-Literals represent fixed values as described in the Literals section.
-
-### List Indexing
-
-List elements are accessed using zero-based indexing with square brackets.
-
-Syntax:
 ```
-indexing ::= expression '[' expression ']'
+let [a b c] = [10 20 30]..
+```
+```
+case [10 20 30] of
+  []: "empty"
+  [x, rest]: add [x hd rest]  | Yields 30
+end
 ```
 
-Examples:
-```
-numbers[0]
-matrix[i][j]
-```
+### Records
+Records are denoted with braces and space-separated bindings (commas are optional).
+They are immutable and can be used with pattern matching and destructuring.
+Keys are strings or identifiers.
 
-### Record Field Access
-
-Record fields are accessed using dot notation.
-
-Syntax:
 ```
-field-access ::= expression '.' identifier
+{
+  name: "Alice"
+  age: 30
+}
 ```
 
-Examples:
 ```
-person.name
-point.x
-```
-
-### Conditional Expressions
-
-Conditional expressions use the ternary operator syntax.
-
-Syntax:
-```
-conditional ::= expression '?' expression ':' expression
+let hash = <{ name age }: concat [name age]>..
+hash {name: "Alice" age: 30}
 ```
 
-Examples:
 ```
-x > 0 ? "positive" : "non-positive"
-isEmpty ? [] : list[0]
-```
-
-### Function Application
-
-Functions are applied by listing the function followed by its arguments.
-
-Syntax:
-```
-application ::= expression expression+
+case {name: "Alice" age: 30} of
+  {}: "no name given"
+  {name}: "hello, ${name}"
+end
 ```
 
-Examples:
-```
-add 3 4
-map double numbers
-```
+### Tuples
+Denoted as lists but used semantically for fixed-size, heterogeneous values.
 
-## Statements
-
-### Let Declarations
-
-Let declarations bind values to identifiers.
-
-Syntax:
 ```
-let-declaration ::= 'let' identifier '=' expression
-```
-
-Examples:
-```
-let x = 42
-let greeting = "hello"
-let add = <a b: a + b>
+let pair = [10.2 20.3]..
 ```
 
 ## Functions
+### Lambda Functions
+Lambdas are defined with angle brackets. The result of calling a function is the
+value of final expression. The prefix of the body may be one or more `let`
+definitions.
 
-### Lambda Expressions
-
-Lambda expressions define anonymous functions.
-
-Syntax:
 ```
-lambda ::= '<' parameter-list ':' expression '>'
-parameter-list ::= identifier*
+<x y: add x y>
 ```
-
-Examples:
 ```
-<x: x + 1>
-<a b: a + b>
-<f g x: f g x>
+<x y:
+  let z = add x y..
+  if gt z 0 then "positive" else "not positive"
+>
 ```
 
-### Function Parameters
+### Function Application
+Parentheses are required to suspend application, such as when using
+functions as values. Parentheses may be used to wrap a complete function
+application expression to enhance human readability.
 
-Function parameters are listed without delimiters or type annotations.
+### Currying
+All functions support implicit currying. Function application with too few
+arguments returns a partially applied function.
 
-Examples:
 ```
-<x: x + x>             // One parameter
-<a b: a + b>           // Two parameters
-<fn acc arr: ...>      // Three parameters
+plus 1 2
+```
+```
+filter (lt 3) [1 2 3 4 5]
+```
+```
+map (double) [1 2 3]
 ```
 
 ### Recursion
+Functions are recursive.
 
-Functions can call themselves directly by name for recursion.
-
-Example:
 ```
-let factorial = <n: n <= 1 ? 1 : n * factorial n - 1>
-```
-
-## Higher-Order Functions
-
-Graffiticode supports higher-order functions that can take functions as arguments and return functions as results.
-
-### Common Higher-Order Functions
-
-#### Map
-
-Applies a function to each element of a list.
-
-Example:
-```
-let map = <fn arr: <i: fn arr[i]>>
+let factorial = <n: if eq n 1 then 1 else sub mul n factorial n 1>..
+factorial 10..  | Yields 3628800
 ```
 
-#### Filter
+## Pattern Matching
+Wildcard pattern: `_`. Supports list and record destructuring.
 
-Selects elements from a list that satisfy a predicate.
-
-Example:
 ```
-let filter = <pred arr: <i: pred arr[i] ? arr[i] : []>>
-```
-
-#### Reduce
-
-Combines elements of a list into a single value.
-
-Example:
-```
-let reduce = <fn acc arr: arr[] ? acc : reduce fn fn acc arr[0] arr[1:]>
+case x of
+  pattern1: expr1
+  pattern2: expr2
+end
 ```
 
-## Operators
+## Control Flow
+### Conditional Expressions
+Must include both `then` and `else`. Always returns a value.
 
-### Arithmetic Operators
+```
+if condition then expr1 else expr2
+```
 
-	 `+`: Addition
-	 `-`: Subtraction
-	 `*`: Multiplication
-	 `/`: Division
-	 `%`: Modulo
+## Built-in Functions
+### Print
+```
+print "hello, world!"..
+```
+### String Concatenation
 
-### Comparison Operators
+```
+concat ["one" 2 "three"]  | Yields "one2three"
+```
 
-	 `==`: Equal to
-	 `!=`: Not equal to
-	 `<`: Less than
-	 `>`: Greater than
-	 `<=`: Less than or equal to
-	 `>=`: Greater than or equal to
+### Arithmetic
+`add`, `sub`, `mul`, `div`, `mod`
 
-### Logical Operators
+### Comparison
+`eq`, `ne`, `lt`, `le`, `gt`, `ge`
 
-	 `&&`: Logical AND
-	 `||`: Logical OR
-	 `!`: Logical NOT
+### List Operations
+`hd`, `tl`
+
+`isEmpty`
+
+`last`
+
+`take n xs`, `drop n xs`, `nth n xs`
+
+`filter`, `map`, `reduce`
+
+`range start end step`
+
+### Record/List Access
+Access to a member of a record or a list is through a string key and
+number key, respectively.
+
+```
+get {name: "Alice", age: 30} "age"
+```
+```
+set ["foo" "bar"] 2 "baz"  | Yields ["foo" "bar" "baz"]
+```
+
+## Dialects
+- Dialects define the available built-ins for a given task
+- Dialects are determined by the development environment
 
 ## Execution Model
+- All function applications are fully resolved at compile time
+- Compiled output contains no lambdas, only static data
+- Runtime may look up external data or perform side effects
+- Error handling:
+  - Syntax errors: handled by the parser
+  - Static errors: handled by the compiler
+  - Runtime errors: handled by asserts in the client code
 
-### Evaluation Strategy
-
-Graffiticode uses eager (strict) evaluation for expressions.
-
-### Scope Rules
-
-Graffiticode uses lexical scoping for variables. Variables are visible within the scope they are defined and any nested scopes.
-
-### First-Class Functions
-
-Functions are first-class values in Graffiticode. They can be:
-	 Assigned to variables
-	 Passed as arguments to other functions
-	 Returned as results from functions
-	 Stored in data structures
-
-## Examples
-
-### Basic Examples
-
-```
-// Variable declarations
-let x = 42
-let greeting = "hello"
-
-// Lists
-let numbers = [1, 2, 3, 4, 5]
-let mixed = [1, "two", [3, 4]]
-
-// Records
-let point = {x: 10, y: 20}
-let person = {name: "Alice", age: 30}
-
-// Functions
-let identity = <x: x>
-let add = <a b: a + b>
-let double = <x: x + x>
-
-// Function application
-let result = add 3 4
-let doubled = double 21
-```
-
-### Advanced Examples
-
-```
-// Higher-order functions
-let map = <fn arr: <i: fn arr[i]>>
-let filter = <pred arr: <i: pred arr[i] ? arr[i] : []>>
-let reduce = <fn acc arr: arr[] ? acc : reduce fn fn acc arr[0] arr[1:]>
-
-// Function composition
-let compose = <f g x: f g x>
-let addThenDouble = compose double add
-let result = addThenDouble 5 7  // double(add(5, 7)) = double(12) = 24
-
-// Recursive functions
-let factorial = <n: n <= 1 ? 1 : n * factorial n - 1>
-```
-
-### Real-World Example: Data Processing
-
-```
-let products = [
-  {id: 1, name: "Laptop", price: 1200, stock: 5},
-  {id: 2, name: "Phone", price: 800, stock: 10},
-  {id: 3, name: "Tablet", price: 500, stock: 0},
-  {id: 4, name: "Headphones", price: 100, stock: 15}
-]
-
-// Filter in-stock items
-let inStock = <item: item.stock > 0>
-let availableItems = filter inStock products
-
-// Apply 10% discount to each item
-let applyDiscount = <item discount: {
-  id: item.id,
-  name: item.name,
-  price: item.price * (1 - discount),
-  stock: item.stock
-}>
-let discountedItems = map <item: applyDiscount item 0.1> availableItems
-
-// Calculate total price
-let calculateTotal = <items: 
-  reduce <item total: total + item.price> 0 items
->
-let total = calculateTotal discountedItems
-```
-
-## Formal Grammar
-
-The following is a formal grammar for Graffiticode in modified BNF notation:
-
-```
-Program ::= Statement+ ".."
-
-Statement ::= LetDefinition | Lambda | List | Record | Identifier
-
-LetDefinition ::= "let" Identifier "=" Expression ".."
-
-Lambda ::= "<" Identifier* ":" Expression ">"
-
-List ::= "[" (Expression ("," Expression)*)? "]"
-
-Record ::= "{" (Identifier ":" Expression ("," Identifier ":" Expression)*)? "}"
-
-Expression ::= Lambda | List | Record | Identifier | Number | String
-             | Expression "[" Expression "]"             // List indexing
-             | Expression "." Identifier                 // Record field access
-             | Expression "?" Expression ":" Expression  // Conditional
-             | Expression Expression+                    // Function application
-             | Expression BinaryOperator Expression      // Binary operation
-
-Identifier ::= [a-zA-Z][a-zA-Z0-9_]*
-
-Number ::= [0-9]+
-
-String ::= "\"" .* "\""
-
-BinaryOperator ::= "+" | "-" | "*" | "/" | "%" | "==" | "!=" | "<" | ">" | "<=" | ">=" | "&&" | "||"
-```
-
-## Future Considerations
-
-The following features are being considered for future versions of the language:
-
-1. **Pattern Matching**: A more comprehensive pattern matching system
-2. **Type Annotations**: Optional type annotations for variables and functions
-3. **Modules**: A module system for organizing code
-4. **Error Handling**: Structured error handling mechanisms
-
----
-
-This specification is subject to change as the language evolves. Please refer to the latest version for the most up-to-date information.
