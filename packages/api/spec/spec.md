@@ -145,8 +145,9 @@ hash {name: "Alice" age: 30}
 
 ```
 case {name: "Alice" age: 30} of
-  {}: "no name given"
+  {}: "empty record"
   {name}: "hello, ${name}"
+  _: "no name given"
 end
 ```
 
