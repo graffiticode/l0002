@@ -1,4 +1,4 @@
-# L0002 | Graffiticode Language Specification
+# L0002 | Spec
 
 ## Overview
 Graffiticode is a purely functional, punctuation-light programming language
