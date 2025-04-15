@@ -15,8 +15,8 @@ with a dialect that includes support for two functions: `hello` and `theme`.
 - Fixed arity for all functions
 - Prefix notation only (no infix operators)
 - Minimal punctuation; whitespace is only used as a token separator
-- Commas (in lists and records) and parens (around function applications) are
-  redundant but allows for human readability
+- Commas are redundant in lists and records but allowed for readability
+- Parens are redundant around function applications but allowed for readability
 - Fully inferred static types (no type annotations)
 - Lambdas and function applications fully resolved at compile time
 - Compiled output is pure data; runtime handles side effects
