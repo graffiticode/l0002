@@ -70,7 +70,7 @@ export class Transformer extends BasisTransformer {
       const err = e0;
       const val = v0.pop();
       resume(err, {
-        ...val,
+        ...(typeof val === "object" && val || {_: val}),
         ...data,
       });
     });
