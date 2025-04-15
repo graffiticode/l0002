@@ -42,7 +42,7 @@
 <li><a href="#sec-Conditional-Expressions"><span class="spec-secid">10.1</span>Conditional Expressions</a></li>
 </ol>
 </li>
-<li><a href="#sec-Vocabulary"><span class="spec-secid">11</span>Vocabulary</a><ol>
+<li><a href="#sec-undefined.Vocabulary"><span class="spec-secid">11</span>Vocabulary</a><ol>
 <li><a href="#sec-Base"><span class="spec-secid">11.1</span>Base</a><ol>
 <li><a href="#sec-Print"><span class="spec-secid">11.1.1</span>Print</a></li>
 <li><a href="#sec-String-Concatenation"><span class="spec-secid">11.1.2</span>String Concatenation</a></li>
@@ -52,7 +52,7 @@
 <li><a href="#sec-Record-List-Access"><span class="spec-secid">11.1.6</span>Record/List Access</a></li>
 </ol>
 </li>
-<li><a href="#sec-Dialect"><span class="spec-secid">11.2</span>Dialect</a><ol>
+<li><a href="#sec-undefined.Vocabulary.Vocabulary"><span class="spec-secid">11.2</span>Vocabulary</a><ol>
 <li><a href="#sec-hello"><span class="spec-secid">11.2.1</span>hello</a></li>
 <li><a href="#sec-theme"><span class="spec-secid">11.2.2</span>theme</a></li>
 </ol>
@@ -260,8 +260,8 @@ end
 </code></pre>
 </section>
 </section>
-<section id="sec-Vocabulary" secid="11">
-<h1><span class="spec-secid" title="link to this section"><a href="#sec-Vocabulary">11</a></span>Vocabulary</h1>
+<section id="sec-undefined.Vocabulary" secid="11">
+<h1><span class="spec-secid" title="link to this section"><a href="#sec-undefined.Vocabulary">11</a></span>Vocabulary</h1>
 <section id="sec-Base" secid="11.1">
 <h2><span class="spec-secid" title="link to this section"><a href="#sec-Base">11.1</a></span>Base</h2>
 <section id="sec-Print" secid="11.1.1">
@@ -300,36 +300,26 @@ end
 </code></pre>
 </section>
 </section>
-<section id="sec-Dialect" secid="11.2">
-<h2><span class="spec-secid" title="link to this section"><a href="#sec-Dialect">11.2</a></span>Dialect</h2>
-<ul>
-<li>Dialects define the available built-ins for a given task</li>
-<li>Dialects are determined by the development environment</li>
-</ul>
+<section id="sec-undefined.Vocabulary.Vocabulary" secid="11.2">
+<h2><span class="spec-secid" title="link to this section"><a href="#sec-undefined.Vocabulary.Vocabulary">11.2</a></span>Vocabulary</h2>
 <section id="sec-hello" secid="11.2.1">
 <h3><span class="spec-secid" title="link to this section"><a href="#sec-hello">11.2.1</a></span>hello</h3>
-<p>Renders the text &ldquo;hello, world!&rdquo; in the view.</p>
-<pre data-language="json"><code><span class="token punctuation">{</span>
-  name<span class="token operator">:</span> <span class="token string">"hello"</span><span class="token punctuation">,</span>
-  args<span class="token operator">:</span> <span class="token punctuation">[</span>
-    string
-  <span class="token punctuation">]</span>
-<span class="token punctuation">}</span>
-</code></pre>
+<p>Renders the text &ldquo;hello, x!&rdquo; in the view, where <code>x</code> is the string value <code>hello</code> is applied to.</p>
+<ul>
+<li>Arity: <code>1</code></li>
+<li>Signature: <code>&lt;string: record&gt;</code></li>
+</ul>
 <pre><code>hello "world"..
 </code></pre>
 </section>
 <section id="sec-theme" secid="11.2.2">
 <h3><span class="spec-secid" title="link to this section"><a href="#sec-theme">11.2.2</a></span>theme</h3>
 <p>Selects the given theme and renders the theme toggle in the view to allow the user to change the theme.</p>
-<pre><code>{
-  name: "theme",
-  args: [
-    [dark|light]
-  ]
-}
-</code></pre>
-<pre><code>theme dark..
+<ul>
+<li>Arity: <code>2</code></li>
+<li>Signature: <code>&lt;[dark|light] record : record&gt;</code></li>
+</ul>
+<pre><code>theme dark hello 'world'..
 </code></pre>
 </section>
 </section>
@@ -375,7 +365,7 @@ Written in <a href="https://spec-md.com" target="_blank">Spec Markdown</a>.</foo
 <li id="_sidebar_10.1"><a href="#sec-Conditional-Expressions"><span class="spec-secid">10.1</span>Conditional Expressions</a></li>
 </ol>
 </li>
-<li id="_sidebar_11"><a href="#sec-Vocabulary"><span class="spec-secid">11</span>Vocabulary</a>
+<li id="_sidebar_11"><a href="#sec-undefined.Vocabulary"><span class="spec-secid">11</span>Vocabulary</a>
 <input hidden class="toggle" type="checkbox" id="_toggle_11" /><label for="_toggle_11"></label>
 <ol>
 <li id="_sidebar_11.1"><a href="#sec-Base"><span class="spec-secid">11.1</span>Base</a>
@@ -389,7 +379,7 @@ Written in <a href="https://spec-md.com" target="_blank">Spec Markdown</a>.</foo
 <li id="_sidebar_11.1.6"><a href="#sec-Record-List-Access"><span class="spec-secid">11.1.6</span>Record/List Access</a></li>
 </ol>
 </li>
-<li id="_sidebar_11.2"><a href="#sec-Dialect"><span class="spec-secid">11.2</span>Dialect</a>
+<li id="_sidebar_11.2"><a href="#sec-undefined.Vocabulary.Vocabulary"><span class="spec-secid">11.2</span>Vocabulary</a>
 <input hidden class="toggle" type="checkbox" id="_toggle_11.2" /><label for="_toggle_11.2"></label>
 <ol>
 <li id="_sidebar_11.2.1"><a href="#sec-hello"><span class="spec-secid">11.2.1</span>hello</a></li>

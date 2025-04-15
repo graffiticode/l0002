@@ -287,21 +287,13 @@ get {name: "Alice", age: 30} "age"
 set ["foo" "bar"] 2 "baz"  | Yields ["foo" "bar" "baz"]
 ```
 
-### Dialect
-- Dialects define the available built-ins for a given task
-- Dialects are determined by the development environment
+### Vocabulary
 
 #### hello
-Renders the text "hello, world!" in the view.
+Renders the text "hello, x!" in the view, where `x` is the string value `hello` is applied to.
 
-```json
-{
-  name: "hello",
-  args: [
-    string
-  ]
-}
-```
+- Arity: `1`
+- Signature: `<string: record>`
 
 ```
 hello "world"..
@@ -311,14 +303,9 @@ hello "world"..
 Selects the given theme and renders the theme toggle in the view to allow the
 user to change the theme.
 
+- Arity: `2`
+- Signature: ```<[dark|light] record : record>```
+
 ```
-{
-  name: "theme",
-  args: [
-    [dark|light]
-  ]
-}
-```
-```
-theme dark..
+theme dark hello 'world'..
 ```
