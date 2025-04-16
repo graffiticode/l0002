@@ -307,5 +307,8 @@ user to change the theme.
 - Signature: ```<[dark|light] record : record>```
 
 ```
-theme dark hello 'world'..
+theme dark hello 'night'..
+```
+```
+theme light hello 'day'..
 ```

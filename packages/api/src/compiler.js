@@ -6,6 +6,31 @@ import {
 } from '@graffiticode/basis';
 
 export class Checker extends BasisChecker {
+  THEME(node, options, resume) {
+    this.visit(node.elts[0], options, async (e0, v0) => {
+      this.visit(node.elts[1], options, async (e1, v1) => {
+        const node0 = this.nodePool[node.elts[0]]
+        console.log(
+          "THEME()",
+          "node0=" + JSON.stringify(node0, null, 2),
+          "v0=" + JSON.stringify(v0, null, 2),
+        );
+        if (v0.tag === "dark" || v0.tag === "light") {
+          const err = [];
+          const val = node;
+          resume(err, val);
+        } else {
+          const err = [{
+            message: `Expecting a tag dark or tag light. Got ${v0.tag && "tag " + v0.tag || v0}.`,
+            ...node0.coord,
+          }];
+          const val = node;
+          resume(err, val);
+        }
+      });
+    });
+  }
+
   HELLO(node, options, resume) {
     this.visit(node.elts[0], options, async (e0, v0) => {
       const err = [];
@@ -55,8 +80,8 @@ export class Transformer extends BasisTransformer {
         const data = options?.data || {};
         const err = [];
         const val = {
-          theme: v0,
-          ...v1,
+          theme: v0?.tag,
+          ...(typeof v1 === "object" && v1 || {_: v1}),
           ...data,
         };
         resume(err, val);
