@@ -1,8 +1,13 @@
 # L0002 Vocabulary
 
-This section documents dialect-specific functions available in the **L0002**
-dialect of Graffiticode. These functions extend the core language with
-additional functionality tailored to L0002 use cases.
+This specification documents dialect-specific functions available in the
+**L0002** language of Graffiticode. These functions extend the core language
+with additional functionality tailored to L0002 use cases.
+
+The core language specification including the definition of its syntax,
+semantics and base library can be found here:
+
+[Graffiticode Language Specification](./graffiticode-language-spec.html)
 
 ## Functions
 
