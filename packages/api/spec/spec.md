@@ -6,7 +6,6 @@ with additional functionality tailored to L0002 use cases.
 
 The core language specification including the definition of its syntax,
 semantics and base library can be found here:
-
 [Graffiticode Language Specification](./graffiticode-language-spec.html)
 
 ## Functions
