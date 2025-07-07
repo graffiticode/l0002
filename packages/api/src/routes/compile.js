@@ -28,9 +28,17 @@ const buildPostCompileHandler = ({ compile }) => {
   return buildHttpHandler(async (req, res) => {
     const auth = ""; //req.auth.context;
     const authToken = parseAuthTokenFromRequest(req);
-    const data = await compile({ auth, authToken, lang: "0002", ...req.body });
-    res.set("Access-Control-Allow-Origin", "*");
-    res.status(200).json(data);
+    try {
+      const data = await compile({ auth, authToken, lang: "0002", ...req.body });
+      res.set("Access-Control-Allow-Origin", "*");
+      res.status(200).json(data);
+    } catch (error) {
+      if (error.message === 'Missing required parameters: code and data') {
+        res.status(400).json({ error: error.message });
+      } else {
+        throw error;
+      }
+    }
   });
 };
 
