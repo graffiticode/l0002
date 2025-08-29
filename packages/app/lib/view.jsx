@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import useSWR from 'swr';
 import { Form } from "./components";
 import { createState } from "./lib/state";
-import { compile } from './swr/fetchers';
+import { compile, getData } from './swr/fetchers';
 import './index.css';
 
 function isNonNullNonEmptyObject(obj) {
@@ -39,7 +39,8 @@ export const View = () => {
   const [ id, setId ] = useState();
   const [ accessToken, setAccessToken ] = useState();
   const [ targetOrigin, setTargetOrigin ] = useState(null);
-  const [ doRecompile, setDoRecompile ] = useState(false);
+  const [ doGetData, setDoGetData ] = useState(false);
+  const [ doCompile, setDoCompile ] = useState(false);
   const [ state ] = useState(createState({}, (data, { type, args }) => {
     // console.log(
     //   "L0002/state.apply()",
@@ -48,21 +49,26 @@ export const View = () => {
     // );
     switch (type) {
     case "init":
-      setDoRecompile(true);
+      // Init data on first load.
       return {
         ...args,
       };
-    case "compile":
+    case "compiled":
+      // Apply data from compile.
       return {
         ...data,
         ...args,
       };
     case "update":
-      setDoRecompile(true);
-      return {
+      const merged = {
         ...data,
         ...args,
       };
+      // Only trigger compile if the merged state is different from current state
+      if (JSON.stringify(merged) !== JSON.stringify(data)) {
+        setDoCompile(true);
+      }
+      return merged;
     default:
       console.error(false, `Unimplemented action type: ${type}`);
       return data;
@@ -86,9 +92,9 @@ export const View = () => {
   }, [window.location.search]);
 
   useEffect(() => {
-    // If `id` changes, then recompile.
+    // If `id` changes, then getData.
     if (id) {
-      setDoRecompile(true);
+      setDoGetData(true);
     }
   }, [id]);
 
@@ -98,8 +104,24 @@ export const View = () => {
     }
   }, [JSON.stringify(state.data)]);
 
+  const getDataResp = useSWR(
+    doGetData && accessToken && id && {
+      accessToken,
+      id,
+    },
+    getData
+  );
+
+  if (getDataResp.data) {
+    state.apply({
+      type: "compiled",
+      args: getDataResp.data,
+    });
+    setDoGetData(false);
+  }
+
   const compileResp = useSWR(
-    doRecompile && accessToken && id && {
+    doCompile && accessToken && id && {
       accessToken,
       id,
       data: state.data,
@@ -109,10 +131,10 @@ export const View = () => {
 
   if (compileResp.data) {
     state.apply({
-      type: "compile",
+      type: "compiled",
       args: compileResp.data,
     });
-    setDoRecompile(false);
+    setDoCompile(false);
   }
 
   return (
