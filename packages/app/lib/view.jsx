@@ -36,9 +36,10 @@ function isNonNullNonEmptyObject(obj) {
 */
 
 export const View = () => {
-  const [ id, setId ] = useState();
-  const [ accessToken, setAccessToken ] = useState();
-  const [ targetOrigin, setTargetOrigin ] = useState(null);
+  const params = new URLSearchParams(window.location.search);
+  const [ id, setId ] = useState(params.get("id"));
+  const [ accessToken, setAccessToken ] = useState(params.get("access_token"));
+  const [ targetOrigin, setTargetOrigin ] = useState(params.get("origin"));
   const [ doGetData, setDoGetData ] = useState(false);
   const [ doCompile, setDoCompile ] = useState(false);
   const [ state ] = useState(createState({}, (data, { type, args }) => {
@@ -67,6 +68,9 @@ export const View = () => {
       // Only trigger compile if the merged state is different from current state
       if (JSON.stringify(merged) !== JSON.stringify(data)) {
         setDoCompile(true);
+        if (targetOrigin) {
+          window.parent.postMessage({focus: {type: "theme", value: merged}}, targetOrigin);
+        }
       }
       return merged;
     default:
@@ -77,10 +81,6 @@ export const View = () => {
 
   useEffect(() => {
     if (window.location.search) {
-      const params = new URLSearchParams(window.location.search);
-      setId(params.get("id"));
-      setAccessToken(params.get("access_token"));
-      setTargetOrigin(params.get("origin"));
       const data = params.get("data");
       if (data) {
         state.apply({

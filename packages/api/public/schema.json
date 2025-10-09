@@ -7,17 +7,39 @@
   "properties": {
     "hello": {
       "description": "The person, place or thing being greeted",
-      "type": "string"
+      "type": "string",
+      "group": ""
     },
     "theme": {
       "description": "Light or dark theme",
       "type": "string",
-      "enum": ["light", "dark"]
+      "enum": ["light", "dark"],
+      "group": ""
     },
     "image": {
       "description": "URL of an image to display",
       "type": "string",
-      "subtype": "url"
+      "subtype": "url",
+      "group": ""
+    }
+  },
+  "definitions": {
+    "hello": {
+      "description": "The person, place or thing being greeted",
+      "type": "string",
+      "group": ""
+    },
+    "theme": {
+      "description": "Light or dark theme",
+      "type": "string",
+      "enum": ["light", "dark"],
+      "group": ""
+    },
+    "image": {
+      "description": "URL of an image to display",
+      "type": "string",
+      "subtype": "url",
+      "group": ""
     }
   },
   "required": ["hello"]
