@@ -14,7 +14,10 @@
     "lint": "eslint test/",
     "lint:fix": "eslint --fix test/",
     "pack": "rm *.tgz; npm -w packages/app pack",
-    "publish": "npm -w packages/app publish"
+    "publish": "npm -w packages/app publish",
+    "gcp:build": "gcloud builds submit --config cloudbuild.yaml",
+    "gcp:deploy": "gcloud run deploy l0002 --source . --port 50002 --region us-central1 --platform managed --allow-unauthenticated",
+    "gcp:logs": "gcloud run logs read l0002 --region us-central1"
   },
   "devDependencies": {
     "eslint": "^8.44.0",
