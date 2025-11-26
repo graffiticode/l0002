@@ -34,6 +34,7 @@ function render({ state }) {
 
 export const Form = ({ state }) => {
   const [ theme, setTheme ] = useState(state.data.theme);
+
   useEffect(() => {
     state.apply({
       type: "update",

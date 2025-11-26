@@ -91,6 +91,13 @@ export const View = () => {
     }
   }, [window.location.search]);
 
+  // Post onload message when view first renders
+  useEffect(() => {
+    if (targetOrigin) {
+      window.parent.postMessage({ type: "onload", version: state.version, data: state.data }, targetOrigin);
+    }
+  }, []); // Empty dependency array ensures this runs only once on mount
+
   useEffect(() => {
     // If `id` changes, then getData.
     if (id) {
