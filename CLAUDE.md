@@ -5,7 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ### Development
-- **Start dev server**: `npm run dev` (starts API server on port 50002 with auth emulator)
+- **Start dev server**: `npm run dev` (starts API server on port 50002 with Firestore emulator)
 - **Build project**: `npm run build` (builds both app and API packages)
 - **Start production**: `npm run start` (starts API server in production mode)
 
@@ -24,40 +24,64 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Testing
 Note: No test runner is currently configured. Test files exist (*.spec.js) but need a test script to be added.
 
+### Deployment
+- **GCP Cloud Build**: `npm run gcp:build` (build and deploy via Cloud Build)
+- **GCP Direct Deploy**: `npm run gcp:deploy` (deploy from source)
+- **View logs**: `npm run gcp:logs`
+
 ## Architecture
 
-This is a Graffiticode language implementation (L0002) with a monorepo structure using npm workspaces:
+This is a Graffiticode language implementation (L0002) with a monorepo structure using npm workspaces.
 
 ### Structure
 - **packages/api/**: Express server providing compilation API and language runtime
   - Port: 50002 (dev) or process.env.PORT
   - Auth integration with @graffiticode/auth service
   - Compiler built on @graffiticode/basis framework
-  
+
 - **packages/app/**: React component library for rendering compiled output
   - Exports Form component and related UI
   - Uses SWR for data fetching
   - Built with Vite, TypeScript, and Tailwind CSS
 
-### Key Components
+### Compiler Pipeline (packages/api/src/)
 
-**Compiler Pipeline** (packages/api/src/):
-- `compiler.js`: Extends BasisCompiler with L0002-specific checker and transformer
+The compiler extends the @graffiticode/basis framework with L0002-specific logic:
+
+- `compiler.js`: Defines `Checker` and `Transformer` classes extending Basis
+  - Checker validates AST nodes (e.g., THEME tag must be "dark" or "light")
+  - Transformer converts AST to output data objects
 - `compile.js`: API endpoint handler for compilation requests
-- Language functions: `HELLO`, `THEME`, `IMAGE`, `PRINT`
+- `lexicon.js`: Language vocabulary definitions
 
-**UI Components** (packages/app/lib/):
-- `view.jsx`: Main view component managing state and compilation
-- `components/form/Form.tsx`: Form component with theme support
+**Language Functions**:
+| Function | Signature | Description |
+|----------|-----------|-------------|
+| `hello` | `<string>` | Renders "hello, {string}!" message |
+| `theme` | `[dark\|light] <record>` | Sets UI theme with toggle button |
+| `image` | `<string>` | Renders image from URL |
+
+### UI Components (packages/app/lib/)
+
+- `view.jsx`: Main view component managing state and compilation via SWR
+- `components/form/Form.tsx`: Form component with theme support and conditional rendering
 - `lib/api.js`: API client for backend communication
-- `swr/fetchers.js`: SWR data fetching utilities
+- `lib/state.js`: Simple reducer-based state management
 
-### Language Specification
-L0002 vocabulary includes:
-- `hello <string>`: Renders hello message
-- `theme [dark|light] <record>`: Sets UI theme with toggle button
+### Data Flow
+
+```
+User Input → State Update → POST /compile → Compiler → Output Data → Form Render → postMessage to parent
+```
+
+The app supports iframe embedding and communicates with parent windows via postMessage.
+
+### Environment Variables
+- `PORT`: Server port (default: 50002)
+- `AUTH_URL`: Auth service URL (default: https://auth.graffiticode.org)
+- `NODE_ENV`: Environment (development/production)
+- `FIRESTORE_EMULATOR_HOST`: Local Firestore emulator (dev only, port 8080)
 
 ### Dependencies
 - Uses local @graffiticode/basis package (symlinked from ../../../basis)
-- Auth service URL configurable via AUTH_URL env var
-- Firestore emulator for development (port 8080)
+- Firestore emulator for development
