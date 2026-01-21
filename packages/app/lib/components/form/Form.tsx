@@ -7,7 +7,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
 
-function renderErrors(errors: string[], theme: string | undefined) {
+function renderErrors(errors: { message: string; from: number; to: number }[], theme: string | undefined) {
   return (
     <div className="flex flex-col gap-2">
       {errors.map((error, i) => (
@@ -20,7 +20,7 @@ function renderErrors(errors: string[], theme: string | undefined) {
               : "bg-red-50 border-red-200 text-red-800"
           )}
         >
-          {error}
+          {error.message}
         </div>
       ))}
     </div>
@@ -71,8 +71,8 @@ export const Form = ({ state }) => {
       )}
     >
       {theme !== undefined && <ThemeToggle theme={theme} setTheme={setTheme} />}
-      {Array.isArray(state.data.ERRORS) && state.data.ERRORS.length > 0
-        ? renderErrors(state.data.ERRORS, theme)
+      {Array.isArray(state.data.errors) && state.data.errors.length > 0
+        ? renderErrors(state.data.errors, theme)
         : render({state})}
     </div>
   );
