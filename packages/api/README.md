@@ -1,30 +1,46 @@
-# React + TypeScript + Vite
+# L0002
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+L0002 is a **template for creating new Graffiticode languages**. Clone this repository when starting a new language.
 
-Currently, two official plugins are available:
+## What it provides
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+L0002 includes example implementations to demonstrate how to build language features:
 
-## Expanding the ESLint configuration
+| Function | Purpose |
+|----------|---------|
+| `hello <string>` | Example text output |
+| `theme [dark\|light] <expr>` | Example interactive UI with toggle |
+| `image <url>` | Example image rendering |
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Usage
 
-- Configure the top-level `parserOptions` property like this:
+When creating a new Graffiticode language:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+1. Clone this repository
+2. Update the port number and language ID
+3. Replace the example functions with your language's vocabulary
+4. Customize the form view for your output rendering needs
+
+The `theme` feature demonstrates how to build interactive UI components - use it as a reference when adding interactivity to your language.
+
+## Architecture
+
+- **packages/api** - Node.js/Express backend compiler
+- **packages/app** - React/TypeScript frontend
+
+Standard Graffiticode compiler pipeline: Checker (validates AST) → Transformer (produces output).
+
+## Related languages
+
+- **L0011** - Production language for form generation (console property editor)
+- **L0012** - Production language for data capture (idempotent value-to-ID mapping)
+
+## Getting started
+
+```bash
+# Install dependencies
+npm install
+
+# Start the API server
+npm start
 ```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
