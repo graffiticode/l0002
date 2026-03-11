@@ -1,3 +1,4 @@
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
 # Dialect L0002 Specific Instructions
 
 L0002 is the base dialect of Graffiticode, focused on simple interactions and visualizations.

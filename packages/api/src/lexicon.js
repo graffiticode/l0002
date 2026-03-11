@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 export const lexicon = {
   "hello" : {
     "tk": 1,
