@@ -16,13 +16,13 @@ export class Checker extends BasisChecker {
           "node0=" + JSON.stringify(node0, null, 2),
           "v0=" + JSON.stringify(v0, null, 2),
         );
-        if (v0.tag === "dark" || v0.tag === "light") {
+        if (v0.tag === "TAG" && v0.elts[0] === "DARK" || v0.elts[0] === "LIGHT") {
           const err = [];
           const val = node;
           resume(err, val);
         } else {
           const err = [{
-            message: `Expecting a tag dark or tag light. Got ${v0.tag && "tag " + v0.tag || v0}.`,
+            message: `Expecting a tag DARK or tag LIGHT. Got ${v0.tag && "tag " + v0.elts[0] || v0}.`,
             ...node0.coord,
           }];
           const val = node;
@@ -81,8 +81,10 @@ export class Transformer extends BasisTransformer {
         const data = options?.data || {};
         const err = [];
         const val = {
-          theme: v0?.tag,
-          ...(typeof v1 === "object" && v1 || {_: v1}),
+          theme: v0?.tag.toLowerCase(),
+          ...(typeof v1 === 'object' && v1 !== null && !Array.isArray(v1) && v1 ||
+            {_: v1}
+           ),
           ...data,
         };
         resume(err, val);
@@ -95,8 +97,14 @@ export class Transformer extends BasisTransformer {
       const data = options?.data || {};
       const err = e0;
       const val = v0.pop();
+      console.log(
+        "PROG()",
+        "val=" + JSON.stringify(val, null, 2),
+      );
       resume(err, {
-        ...(typeof val === "object" && val || {_: val}),
+        ...(typeof val === 'object' && val !== null && !Array.isArray(val) && val ||
+            {_: val}
+           ),
         ...data,
       });
     });
