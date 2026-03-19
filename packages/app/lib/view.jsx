@@ -106,9 +106,10 @@ export const View = () => {
     }
   }, [id]);
 
+  // Post state data to parent whenever it changes
   useEffect(() => {
     if (targetOrigin) {
-      window.parent.postMessage(state.data, targetOrigin);
+      window.parent.postMessage({ type: "data-updated", data: state.data }, targetOrigin);
     }
   }, [JSON.stringify(state.data)]);
 
