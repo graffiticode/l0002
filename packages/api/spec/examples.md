@@ -1,7 +1,7 @@
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
 # L0002 RAG Training Examples
 
-100 example prompts for training a RAG model on the L0002 core language.
+130 example prompts for training a RAG model on the L0002 core language.
 
 ## Category 1: Basic Expressions and Literals (1–20)
 
@@ -37,7 +37,7 @@
 27. Write Graffiticode that takes the first three elements of `[1 2 3 4 5]`.
 28. Write Graffiticode that drops the first two elements of `[1 2 3 4 5]`.
 29. Write Graffiticode that returns the third element of `[10 20 30 40]`.
-30. Write Graffiticode that appends `[4 5]` to `[1 2 3]`.
+30. Write Graffiticode that concatenates `[1 2 3]` and `[4 5]` into a single list.
 31. Write Graffiticode that adds the number 1 to the front of `[2 3 4]`.
 32. Write Graffiticode that creates the list of numbers from 1 to 5 using `range`.
 33. Write Graffiticode that creates the list of numbers from 0 to 10 with step 2.
@@ -120,3 +120,42 @@
 98. Write Graffiticode that multiplies the first two numbers of `[3 5 7]`.
 99. Write Graffiticode that sums numbers in a list using reduce and a lambda.
 100. Write Graffiticode that defines a function `double`, maps it over `[1 2 3 4]`, and sums the result.
+
+## Category 7: Tags and Tag Pattern Matching (101–110)
+
+101. Write Graffiticode that defines a tag value `red` using the `tag` keyword.
+102. Write Graffiticode that defines two tags `red` and `blue` and binds `red` to a variable `color`.
+103. Write Graffiticode that defines tags `red` and `blue`, then uses `case` to return "warm" for `red` and "cool" for `blue`.
+104. Write Graffiticode that defines tags `on` and `off`, binds one to a variable, and matches it with a wildcard fallback returning "unknown".
+105. Write Graffiticode that defines two tags and uses `equiv` to check if they are the same.
+106. Write Graffiticode that defines a tag `red` and uses `equiv` to compare it to itself.
+107. Write Graffiticode that defines three tags `small`, `medium`, and `large`, binds one to a variable, and uses `case` to return a number for each.
+108. Write Graffiticode that defines two tags and puts them in a list.
+109. Write Graffiticode that defines tags `cat` and `dog`, creates a list of them, and maps a lambda that uses `case` to convert each to a string.
+110. Write Graffiticode that defines tags `yes` and `no` and uses `case` to return `true` for `yes` and `false` for `no`.
+
+## Category 8: Comparison Operators (111–118)
+
+111. Write Graffiticode that checks if 5 equals 5 using `eq`.
+112. Write Graffiticode that checks if 3 is not equal to 7 using `ne`.
+113. Write Graffiticode that checks if 10 is greater than 4 using `gt`.
+114. Write Graffiticode that checks if 2 is less than 9 using `lt`.
+115. Write Graffiticode that checks if 5 is greater than or equal to 5 using `ge`.
+116. Write Graffiticode that checks if 3 is less than or equal to 8 using `le`.
+117. Write Graffiticode that filters numbers greater than 5 from `[2 4 6 8 10]` using `gt`.
+118. Write Graffiticode that filters numbers equal to 3 from `[1 2 3 3 4]` using `eq`.
+
+## Category 9: New Built-in Functions (119–130)
+
+119. Write Graffiticode that computes 2 raised to the power of 10 using `pow`.
+120. Write Graffiticode that squares a number using `pow`.
+121. Write Graffiticode that concatenates the strings "hello " and "world" using `concat`.
+122. Write Graffiticode that concatenates two lists `[1 2]` and `[3 4]` using `concat`.
+123. Write Graffiticode that prepends the number 0 to the list `[1 2 3]` using `cons`.
+124. Write Graffiticode that appends the number 4 to the list `[1 2 3]` using `append`.
+125. Write Graffiticode that returns the last element of `[10 20 30]` using `last`.
+126. Write Graffiticode that returns the length of `[5 6 7 8 9]` using `length`.
+127. Write Graffiticode that returns the length of the string "hello" using `length`.
+128. Write Graffiticode that takes the first three elements of `[1 2 3 4 5]` using `take`.
+129. Write Graffiticode that drops the first two elements of `[1 2 3 4 5]` using `drop`.
+130. Write Graffiticode that parses the string `"{\"x\": 1}"` using `json`.
