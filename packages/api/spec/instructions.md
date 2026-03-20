@@ -18,10 +18,10 @@ Here are some common patterns in L0002:
 - Greeting with name: `hello concat "Hello, " name..`
 - Conditional output:
   ```
-  if condition then 
-    hello "Yes" 
-  else 
-    hello "No"
+  if condition then
+    "Yes"
+  else
+    "No"
   ..
   ```
 - List processing: `map (double) [1 2 3]..`
