@@ -5,7 +5,6 @@ L0002 is the base dialect of Graffiticode, focused on simple interactions and vi
 
 ## L0002 Specific Guidelines
 
-- Use `hello` to display text output: `hello "Hello, world!"..`
 - Use `theme` to set the visual theme: `theme dark..` or `theme light..`
 - Prefer simple, readable expressions that are easy to understand
 - Focus on making the code concise yet expressive
