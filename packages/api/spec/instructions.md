@@ -15,7 +15,7 @@ L0002 is the base dialect of Graffiticode, focused on simple interactions and vi
 
 Here are some common patterns in L0002:
 
-- Greeting with name: `hello concat "Hello, " name..`
+- Greeting with name: `hello name..`
 - Conditional output:
   ```
   if condition then

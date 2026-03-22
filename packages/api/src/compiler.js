@@ -82,9 +82,7 @@ export class Transformer extends BasisTransformer {
         const err = [];
         const val = {
           theme: v0?.tag.toLowerCase(),
-          ...(typeof v1 === 'object' && v1 !== null && !Array.isArray(v1) && v1 ||
-            {_: v1}
-           ),
+          _: v1,
           ...data,
         };
         resume(err, val);
@@ -101,10 +99,9 @@ export class Transformer extends BasisTransformer {
         "PROG()",
         "val=" + JSON.stringify(val, null, 2),
       );
+      const hasUnderscore = typeof val === 'object' && val !== null && !Array.isArray(val) && '_' in val;
       resume(err, {
-        ...(typeof val === 'object' && val !== null && !Array.isArray(val) && val ||
-            {_: val}
-           ),
+        ...(hasUnderscore ? val : { _: val }),
         ...data,
       });
     });

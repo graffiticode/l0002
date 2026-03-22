@@ -29,8 +29,12 @@ function renderErrors(errors: { message: string; from: number; to: number }[], t
 }
 
 function renderJSON(data) {
-  delete data.schema;
-  delete data.theme;
+  if (typeof data === 'object' && data !== null && !Array.isArray(data)) {
+    const { schema, theme, ...rest } = data;
+    return (
+      <pre className="text-xs">{JSON.stringify(rest, null, 2)}</pre>
+    );
+  }
   return (
     <pre className="text-xs">{JSON.stringify(data, null, 2)}</pre>
   );
@@ -38,23 +42,26 @@ function renderJSON(data) {
 
 function render({ state }) {
   const { data } = state;
-  if (data?.print !== undefined) {
-    if (typeof data.print === "string") {
-      return <span className="text-sm">{data.print}</span>;
+  const source = data?._ ?? data;
+  if (source?.print !== undefined) {
+    if (typeof source.print === "string") {
+      return <span className="text-sm">{source.print}</span>;
     } else {
-      return renderJSON(data.print);
+      return renderJSON(source.print);
     }
-  } else if (typeof data?.hello === "string") {
-    return <span className="text-sm">{`hello, ${data.hello}!`}</span>;
-  } else if (typeof data.image === "string") {
-    return <img src={data.image} />;
+  } else if (typeof source?.hello === "string") {
+    return <span className="text-sm">{`hello, ${source.hello}!`}</span>;
+  } else if (typeof source?.image === "string") {
+    return <img src={source.image} />;
   } else {
-    return renderJSON(data);
+    return renderJSON(source);
   }
 }
 
 export const Form = ({ state }) => {
-  const [ theme, setTheme ] = useState(state.data.theme);
+  const source = state.data?._ ?? state.data;
+  const initialTheme = typeof source === 'object' && source !== null && !Array.isArray(source) ? source.theme : undefined;
+  const [ theme, setTheme ] = useState(initialTheme ?? state.data.theme);
 
   useEffect(() => {
     state.apply({

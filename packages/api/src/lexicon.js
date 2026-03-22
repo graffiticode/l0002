@@ -20,5 +20,19 @@ export const lexicon = {
     "cls": "function",
     "length": 2,
     "arity": 2
+  },
+  "DARK" : {
+    "tk": 22,
+    "name": "TAG",
+    "cls": "val",
+    "length": 0,
+    "arity": 0
+  },
+  "LIGHT" : {
+    "tk": 22,
+    "name": "TAG",
+    "cls": "val",
+    "length": 0,
+    "arity": 0
   }
 }
