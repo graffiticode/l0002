@@ -19,6 +19,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Build package**: `npm run pack` (creates distributable package)
 - **Publish package**: `npm run publish` (publishes @graffiticode/l0002)
 - **Build lexicon**: `cd packages/api && npm run build-lexicon` (rebuilds language lexicon)
+- **Build instructions**: `cd packages/api && npm run build-instructions` (merges basis + l0002 instructions for AI code generation)
 - **Build spec**: `cd packages/api && npm run build-spec` (builds language specification HTML)
 
 ### Testing

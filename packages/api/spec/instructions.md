@@ -1,27 +1,41 @@
 <!-- SPDX-License-Identifier: CC-BY-4.0 -->
-# Dialect L0002 Specific Instructions
+# L0002 Dialect Extensions
 
 L0002 is the base dialect of Graffiticode, focused on simple interactions and visualizations.
 
-## L0002 Specific Guidelines
+## L0002 Functions
 
-- Use `theme` to set the visual theme: `theme dark..` or `theme light..`
-- Prefer simple, readable expressions that are easy to understand
-- Focus on making the code concise yet expressive
-- Generate well-structured and modular code
-- Add descriptive comments using the pipe symbol `|`
+| Function | Signature | Description |
+| :------- | :-------- | :---------- |
+| `hello` | `<string: record>` | Renders a "hello, {string}!" greeting |
+| `image` | `<string: record>` | Renders an image from a URL |
+| `theme` | `<tag record: record>` | Sets UI theme (DARK or LIGHT) wrapping a body expression |
+| `id` | `<string any: record>` | Sets an element identifier |
 
-## Example Patterns
+## L0002 Built-in Tags
 
-Here are some common patterns in L0002:
+- `DARK` — dark theme
+- `LIGHT` — light theme
 
-- Greeting with name: `hello name..`
-- Conditional output:
-  ```
-  if condition then
-    "Yes"
-  else
-    "No"
-  ..
-  ```
-- List processing: `map (double) [1 2 3]..`
+## L0002 Examples
+
+### Hello world
+```
+hello "world"..
+```
+
+### Themed greeting
+```
+theme DARK hello "world"..
+```
+
+### Image display
+```
+image "https://example.com/photo.jpg"..
+```
+
+### Combining core and L0002 functions
+```
+let name = "world"..
+theme LIGHT hello name..
+```
