@@ -2,7 +2,7 @@
   "$schema": "",
   "$id": "",
   "title": "L0002",
-  "description": "A starter language",
+  "description": "Core graffiticode language",
   "type": "object",
   "properties": {
     "hello": {
