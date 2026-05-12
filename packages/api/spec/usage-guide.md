@@ -1,105 +1,48 @@
-# L0002 Usage Guide
+<!-- SPDX-License-Identifier: CC-BY-4.0 -->
+# L0002 User Guide
 
-Welcome to the L0002 language guide. L0002 is a Graffiticode language designed for creating and manipulating basic expressions, lists, and functional programming constructs. You can access and use L0002 through the Graffiticode MCP tool or console, where you can describe your desired operations in natural language, and the system will generate the corresponding Graffiticode.
+Agent-facing guide for authoring L0002 programs. Read this before composing a `create_item` prompt or an `update_item` modification.
 
-## What You Can Create with L0002
+## Overview
 
-### Basic Expressions and Literals
+L0002 is the base Graffiticode dialect — a small functional language with the full core toolkit (arithmetic, strings, lists, lambdas, pattern matching, tags) plus a handful of UI rendering primitives (`hello`, `image`, `theme`, `id`). Input is a natural-language description of either a value to compute or a simple piece of UI to display; output is an L0002 program whose evaluation is what you get back — either a computed value (number, string, list, record) or a rendered HTML fragment in the hosted React app. Because L0002 is the base dialect, it is the right tool when the job is "evaluate a small program" or "render a hello / image / themed greeting" — not when the job needs a domain-specific artifact (assessments, spreadsheets, SVG, board content). Those belong in higher-numbered dialects.
 
-L0002 allows you to perform arithmetic operations and handle basic data types such as numbers and strings. You can create expressions that add, subtract, multiply, and manipulate numbers or strings.
+When composing a request, name what you want first — the value to compute or the UI element to render — then the inputs (literals, ranges, lists) and any transformation (map, filter, reduce, pattern match). For UI, the pattern is `theme DARK hello "world"..` or `image "https://..."..`; every L0002 program ends with `..`. For computation, the pattern is an expression whose value is the result: `1 + 2..`, `map double [1 2 3]..`, `filter (lambda x (gt x 3)) [1 2 3 4 5]..`. Tags (`DARK`, `LIGHT`, user-defined) use the `tag` keyword and pattern-match with `case`. Lists are space-separated (`[1 2 3]`, not `[1, 2, 3]`). Prefer built-ins (`map`, `filter`, `reduce`, `range`, `pow`, `concat`, `cons`, `append`, `last`, `length`, `take`, `drop`, `json`, comparison operators `eq`/`ne`/`gt`/`lt`/`ge`/`le`) over defining helpers from scratch.
 
-Example Requests:
-- "Add 7 and 5."
-- "Multiply 6 by 4."
-- "Return the number 42."
-- "Return the string 'hello'."
+In scope: arithmetic, string manipulation, list construction and traversal, `range`, `map` / `filter` / `reduce`, lambdas and `let`-bound helpers, pattern matching on numbers / lists / pairs / records / tags, comparison operators, `hello` / `image` / `theme` / `id` UI primitives, `DARK` / `LIGHT` built-in tags. Out of scope: domain-specific artifacts (assessments → L0158, spreadsheets → L0166, FigJam boards → L0172, data pipelines → L0170, and so on), external data sources, stateful operations, streaming I/O, and custom renderers beyond the four UI primitives.
 
-**Capabilities**: L0002 can perform basic arithmetic operations and return simple data types.  
-**Limitations**: It cannot handle complex data structures or perform operations beyond basic arithmetic.
+## Vocabulary Cues
 
-### Lists
+Say this to get that:
 
-L0002 supports operations on lists, including creating lists, accessing elements, and modifying lists.
+- **Arithmetic** — "add 7 and 5", "compute 2 to the power of 10", "the remainder when 17 is divided by 5". Triggers literal expressions like `7 + 5..`, `pow 2 10..`, `17 % 5..`.
+- **Lists** — "the list [1 2 3]", "first / last / length of the list", "range from 1 to 10". Uses `[a b c]` (space-separated), `head` / `last` / `length`, `range 1 10 1`.
+- **Map / filter / reduce** — "double every element", "keep only even numbers", "sum the list". Triggers `map (lambda x (mul x 2)) [1 2 3]..`, `filter (lambda x (eq (mod x 2) 0)) [...]..`, `reduce add 0 [...]..`.
+- **Lambda** — "define a function", "with a lambda that doubles x". Syntax: `let double = lambda x (mul x 2)..` or inline `lambda x (...)`.
+- **Pattern matching** — "match a pair (x, y) and return their sum", "match the number 1 and return 'one'". Uses `case` with patterns `(x, y)`, `{name, age}`, literals, and `_` wildcard.
+- **Tags** — "define a tag `red`", "match a tag and return a string". Use `tag red..` to declare, `case` to dispatch, `equiv` to compare.
+- **hello** — "render a hello message for 'world'" → `hello "world"..`. Produces `hello, world!`.
+- **image** — "display the image at URL X" → `image "https://..."..`.
+- **theme** — "in dark / light theme". Wraps a body: `theme DARK hello "night"..`. `DARK` and `LIGHT` are built-in tags; the rendered page gets a theme toggle.
+- **id** — "with id 'greeting'" → `id "greeting" hello "world"..`. Attaches an element identifier for downstream referencing.
+- **Comparison** — `eq`, `ne`, `gt`, `lt`, `ge`, `le`. "Checks if 5 equals 5" → `eq 5 5..`.
+- **Program terminator** — every L0002 program ends with `..`. Don't omit it.
 
-Example Requests:
-- "Return the list `[1, 2, 3]`."
-- "Return the first element of `[5, 6, 7]`."
-- "Append `[4, 5]` to `[1, 2, 3]`."
-- "Create a list of numbers from 1 to 5 using `range`."
+## Example Prompts
 
-**Capabilities**: You can create lists, access elements, and perform basic list operations like appending and slicing.  
-**Limitations**: It does not support complex list manipulations or nested list operations.
+- *"Double every number in [1 2 3 4] and then sum them."* → `expression`
+- *"Define a function `triple` that multiplies a number by 3, then map it over the range 1 to 5."* → `expression`
+- *"Filter the even numbers out of [1 2 3 4 5 6] using a lambda with `eq` and `mod`."* → `expression`
+- *"Match a pair (x, y) and return whichever value is larger."* → `expression`
+- *"Render a hello greeting for 'world' in the dark theme."* → `rendered_ui`
+- *"Display the image at https://example.com/photo.jpg."* → `rendered_ui`
+- *"Define tags `yes` and `no`, then return `true` for `yes` and `false` for `no` using `case`."* → `expression`
+- *"Sum the squares of the numbers from 1 to 10."* → `expression`
 
-### Map, Filter, and Reduce
+## Out of Scope
 
-L0002 provides functional programming capabilities to map, filter, and reduce lists.
-
-Example Requests:
-- "Double every number in `[1, 2, 3, 4]`."
-- "Keep only the even numbers in `[1, 2, 3, 4, 5, 6]`."
-- "Sum all numbers in `[1, 2, 3, 4]`."
-- "Filter out negative numbers from `[3, -1, 4, -2, 5]`."
-
-**Capabilities**: You can apply transformations to lists, filter elements based on conditions, and aggregate list values.  
-**Limitations**: It cannot perform complex transformations that require external data or state.
-
-### Lambdas and Higher-Order Functions
-
-You can define and use functions, including lambdas, to perform operations on data.
-
-Example Requests:
-- "Define a function `double` that multiplies a number by 2."
-- "Map a lambda that squares numbers over `[2, 3, 4]`."
-- "Reduce `[1, 2, 3, 4]` using addition."
-- "Define a function `triple` and map it over `[1, 2, 3]`."
-
-**Capabilities**: L0002 supports defining simple functions and using them in higher-order functions like map and reduce.  
-**Limitations**: It does not support complex function definitions or stateful operations.
-
-### Pattern Matching
-
-L0002 includes pattern matching capabilities to handle different data structures and conditions.
-
-Example Requests:
-- "Match the number 1 and return 'one'."
-- "Match a list and return the head."
-- "Match a pair `(x, y)` and return their sum."
-- "Match a record `{name, age}` and format a string."
-
-**Capabilities**: You can match patterns in data and perform operations based on the match.  
-**Limitations**: It does not support advanced pattern matching with nested structures or complex conditions.
-
-### Mixed Programs
-
-Combine various operations to create more complex programs that utilize multiple capabilities of L0002.
-
-Example Requests:
-- "Double numbers in `[1, 2, 3, 4]` and then sum them."
-- "Square numbers from 1 to 10 and filter even results."
-- "Add the elements of a pair `(3, 7)`."
-- "Find the largest number in `[3, 9, 2, 7]`."
-
-**Capabilities**: You can create programs that combine multiple operations for more complex data processing.  
-**Limitations**: It cannot handle highly complex logic or operations requiring external data sources.
-
-## Iterating and Refining
-
-L0002 allows you to refine your requests by iterating on previous operations. You can update elements of your program to adjust the output or behavior.
-
-Example Requests:
-- "Update the list to include more elements."
-- "Refine the function to handle additional cases."
-- "Adjust the filter condition to exclude more values."
-
-**Capabilities**: You can make incremental changes to your programs to refine their behavior.  
-**Limitations**: It does not support dynamic updates that require re-evaluation of complex logic.
-
-## Cross-References to Other Graffiticode Languages
-
-For tasks that L0002 cannot perform, consider using other Graffiticode languages:
-
-- **L0003**: For advanced data processing and complex data structures.
-- **L0004**: For graphical and visual data representation.
-- **L0005**: For integration with external data sources and APIs.
-
-This guide provides an overview of what you can achieve with L0002. Use the examples as a starting point to explore the capabilities of the language through the Graffiticode MCP tool or console.
+- **Domain-specific artifacts** — assessments, spreadsheets, SVG charts, FigJam boards, data pipelines, etc. Use the higher-numbered dialects (L0158 assessments, L0166 spreadsheets, L0170 data, L0172 FigJam, and so on).
+- **External data** — HTTP calls, file I/O, database queries. L0002 evaluates a closed program against literal inputs.
+- **Stateful or streaming operations** — no mutable variables, no event loops, no async.
+- **Custom rendering** — only `hello`, `image`, `theme`, and `id` emit UI. Richer UI belongs in a domain-specific dialect with its own renderer.
+- **Cross-language composition** — L0002 cannot `import` another dialect's functions; each item runs in exactly one language.
