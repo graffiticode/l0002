@@ -9,7 +9,7 @@
     "UI primitives: hello (greetings), image (URL), theme (DARK / LIGHT), id (element identifier)"
   ],
   "out_of_scope": [
-    "Domain-specific artifacts (assessments, spreadsheets, SVG charts, FigJam boards, data pipelines) — use higher-numbered dialects",
+    "Anything that produces a domain-specific artifact (assessments, spreadsheets, charts, maps, diagrams, boards, data pipelines, games, puzzles) — those belong in higher-numbered dialects, not in L0002",
     "External data (HTTP, file, database) — L0002 evaluates a closed program",
     "Stateful or streaming operations",
     "Custom rendering beyond hello / image / theme / id",
