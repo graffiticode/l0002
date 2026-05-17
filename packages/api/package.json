@@ -13,11 +13,13 @@
     "build-lexicon": "node tools/build-lexicon.js > ./dist/lexicon.js",
     "build-instructions": "node tools/build-instructions.js > ./dist/instructions.md",
     "build-spec": "npx spec-md ./spec/spec.md > ./dist/spec.html && cp ./spec/template.gc ./dist/template.gc && cp ./spec/usage-guide.md ./dist/usage-guide.md && cp ./spec/scope.json ./dist/scope.json",
-    "build-language-info": "node tools/build-language-info.js"
+    "build-language-info": "node tools/build-language-info.js",
+    "watch-spec": "npx nodemon --exec 'npx spec-md > ./dist/spec.html' ./spec/spec.md"
   },
   "dependencies": {
     "@graffiticode/auth": "^2.1.2",
     "@graffiticode/basis": "^1.12.0",
+    "@graffiticode/tracing": "^0.3.1",
     "cors": "^2.8.5",
     "errorhandler": "^1.5.1",
     "graphql": "^16.13.2",

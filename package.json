@@ -11,13 +11,13 @@
     "build-static": "npm run -w packages/api build-lexicon; npm run -w packages/api build-spec; npm run -w packages/api build-instructions; npm run -w packages/api build-language-info",
     "dev": "npm run -w packages/api dev",
     "start": "npm run -w packages/api start",
-    "lint": "eslint test/",
-    "lint:fix": "eslint --fix test/",
+    "lint": "npm run -w packages/api lint; npm run -w packages/app lint",
+    "lint:fix": "npm run -w packages/api lint:fix; npm run -w packages/app lint:fix",
     "pack": "rm *.tgz; npm -w packages/app pack",
-    "publish": "npm -w packages/app publish",
-    "gcp:build": "gcloud builds submit --config cloudbuild.yaml --substitutions=COMMIT_SHA=$(git rev-parse --short HEAD 2>/dev/null || echo 'latest')",
-    "gcp:deploy": "gcloud run deploy l0002 --source . --port 50002 --region us-central1 --platform managed --allow-unauthenticated",
-    "gcp:logs": "gcloud run logs read l0002 --region us-central1"
+    "publish": "npm -w packages/app publish --access=public",
+    "gcp:build": "gcloud builds submit --project graffiticode --config cloudbuild.yaml --substitutions=COMMIT_SHA=$(git rev-parse --short HEAD 2>/dev/null || echo 'latest')",
+    "gcp:deploy": "gcloud run deploy l0002 --project graffiticode --source . --port 50002 --region us-central1 --platform managed --allow-unauthenticated",
+    "gcp:logs": "gcloud run logs read l0002 --project graffiticode --region us-central1"
   },
   "devDependencies": {
     "eslint": "^8.44.0",
