@@ -20,15 +20,19 @@ function hasRenderableData(data) {
 
 // Both the /compile response and the stored /data response use the standard
 // { data, errors } envelope: compiled output is in `data`, compile errors in
-// `errors` (always an array). Normalize either an envelope or a bare/legacy
-// value (host-provided init data, items stored before the envelope) into
-// { data, errors } so callers never have to inspect the shape.
+// `errors` (always an array). A response carrying a `data` and/or `errors`
+// field is read as an envelope. For backward compatibility, a payload with
+// neither field (a legacy/raw value, host-provided init data, or output from a
+// language not yet on the envelope) is used as the data model itself.
 function unwrapEnvelope(resp) {
   if (
     resp && typeof resp === "object" && !Array.isArray(resp) &&
-    "data" in resp && Array.isArray(resp.errors)
+    ("data" in resp || "errors" in resp)
   ) {
-    return { data: resp.data, errors: resp.errors };
+    return {
+      data: resp.data,
+      errors: Array.isArray(resp.errors) ? resp.errors : [],
+    };
   }
   return { data: resp, errors: [] };
 }
