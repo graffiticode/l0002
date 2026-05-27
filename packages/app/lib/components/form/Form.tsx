@@ -41,8 +41,7 @@ function renderJSON(data) {
 }
 
 function render({ state }) {
-  const { data } = state;
-  const source = data?._ ?? data;
+  const source = state.data;
   if (source?.print !== undefined) {
     if (typeof source.print === "string") {
       return <span className="text-sm">{source.print}</span>;
@@ -53,17 +52,30 @@ function render({ state }) {
     return <span className="text-sm">{`hello, ${source.hello}!`}</span>;
   } else if (typeof source?.image === "string") {
     return <img src={source.image} />;
+  } else if (source?.value !== undefined) {
+    // A `value` field holds the primary content (e.g. a `theme` wrapping a
+    // non-record body). Render the value itself, not the whole payload.
+    if (typeof source.value === "string") {
+      return <span className="text-sm">{source.value}</span>;
+    } else {
+      return renderJSON(source.value);
+    }
   } else {
     return renderJSON(source);
   }
 }
 
 export const Form = ({ state }) => {
-  const source = state.data?._ ?? state.data;
-  const initialTheme = typeof source === 'object' && source !== null && !Array.isArray(source) ? source.theme : undefined;
-  const [ theme, setTheme ] = useState(initialTheme ?? state.data.theme);
+  const data = state.data;
+  const initialTheme = typeof data === 'object' && data !== null && !Array.isArray(data) ? data.theme : undefined;
+  const [ theme, setTheme ] = useState(initialTheme);
 
   useEffect(() => {
+    // Only a defined theme is meaningful; merging `{ theme: undefined }` into a
+    // bare value (e.g. a number result) would clobber it.
+    if (theme === undefined) {
+      return;
+    }
     state.apply({
       type: "update",
       args: {
@@ -79,8 +91,8 @@ export const Form = ({ state }) => {
       )}
     >
       {theme !== undefined && <ThemeToggle theme={theme} setTheme={setTheme} />}
-      {Array.isArray(state.data.errors) && state.data.errors.length > 0
-        ? renderErrors(state.data.errors, theme)
+      {Array.isArray(state.errors) && state.errors.length > 0
+        ? renderErrors(state.errors, theme)
         : render({state})}
     </div>
   );

@@ -80,9 +80,15 @@ export class Transformer extends BasisTransformer {
       this.visit(node.elts[1], options, async (e1, v1) => {
         const data = options?.data || {};
         const err = [];
+        // theme always yields a record carrying the `theme` key. A record body
+        // is spread in; a non-record body (e.g. a bare string) is boxed under
+        // `value` so it can coexist with `theme`. State `data` is merged last so
+        // a theme toggle overrides the program's theme.
+        const isRecord = typeof v1 === "object" && v1 !== null && !Array.isArray(v1);
+        const body = isRecord ? v1 : { value: v1 };
         const val = {
+          ...body,
           theme: v0?.tag.toLowerCase(),
-          _: v1,
           ...data,
         };
         resume(err, val);
@@ -95,15 +101,11 @@ export class Transformer extends BasisTransformer {
       const data = options?.data || {};
       const err = e0;
       const val = v0.pop();
-      console.log(
-        "PROG()",
-        "val=" + JSON.stringify(val, null, 2),
-      );
-      const hasUnderscore = typeof val === 'object' && val !== null && !Array.isArray(val) && '_' in val;
-      resume(err, {
-        ...(hasUnderscore ? val : { _: val }),
-        ...data,
-      });
+      // The compiled result is the program's value. A record is merged with
+      // state `data` (preserving accumulated state such as a theme toggle); a
+      // non-record value (number, string, list) is returned as-is.
+      const isRecord = typeof val === "object" && val !== null && !Array.isArray(val);
+      resume(err, isRecord ? { ...val, ...data } : val);
     });
   }
 

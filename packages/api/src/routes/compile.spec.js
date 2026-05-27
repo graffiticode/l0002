@@ -1,81 +1,77 @@
 // SPDX-License-Identifier: MIT
-import { startAuthApp } from "@graffiticode/auth/testing";
-import request from "supertest";
-import { createApp } from "../app.js";
-import { TASK1, DATA1, TASK2, DATA2 } from "../testing/fixture.js";
-import { startLangApp } from "../testing/lang.js";
-import { createSuccessResponse, createErrorResponse, createError } from "./utils.js";
+import express from "express";
+import compileRoute from "./compile.js";
+import { compile } from "../compile.js";
+
+// "hello, world!".. — a bare string program.
+const STRING_CODE = {
+  1: { tag: "STR", elts: ["hello, world!"] },
+  2: { tag: "EXPRS", elts: [1] },
+  3: { tag: "PROG", elts: [2] },
+  root: 3
+};
+
+// theme <"nope"> {} .. — an invalid theme tag.
+const BAD_THEME_CODE = {
+  1: { tag: "STR", elts: ["nope"] },
+  2: { tag: "RECORD", elts: [] },
+  3: { tag: "THEME", elts: [1, 2] },
+  4: { tag: "EXPRS", elts: [3] },
+  5: { tag: "PROG", elts: [4] },
+  root: 5
+};
+
+const startServer = () => new Promise((resolve) => {
+  const app = express();
+  app.use(express.json());
+  app.use("/compile", compileRoute({ compile }));
+  const server = app.listen(0, "127.0.0.1", () => {
+    const { port } = server.address();
+    resolve({
+      url: `http://127.0.0.1:${port}`,
+      close: () => new Promise((res) => server.close(res)),
+    });
+  });
+});
 
 describe("routes/compile", () => {
-  let langApp;
-  let authApp;
-  let app;
+  let server;
 
   beforeEach(async () => {
-    langApp = await startLangApp();
-    authApp = await startAuthApp();
-    app = createApp({ authUrl: authApp.url });
-
-    process.env.BASE_URL_L0002 = langApp.url;
+    server = await startServer();
   });
 
   afterEach(async () => {
-    await authApp.cleanUp();
-    await langApp.cleanUp();
+    await server.close();
   });
 
-  it("should compile source", async () => {
-    langApp.setData(TASK1.code, DATA1);
-    const res = await request(app)
-      .post("/compile")
-      .send({ item: TASK1 });
+  const postCompile = (body) =>
+    fetch(`${server.url}/compile`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(body),
+    });
 
-    expect(res.body).toEqual(
-      expect.objectContaining(
-        createSuccessResponse({ data: DATA1 })
-      )
-    );
+  it("responds with the { data, errors } envelope on success", async () => {
+    const res = await postCompile({ code: STRING_CODE, data: {} });
+    expect(res.status).toBe(200);
+    await expect(res.json()).resolves.toEqual({ data: "hello, world!", errors: [] });
   });
 
-  it("should compile item", async () => {
-    langApp.setData(TASK1.code, DATA1);
-    const res = await request(app)
-      .post("/compile")
-      .send({ item: { ...TASK1, data: {} } });
-
-    expect(res.body).toEqual(
-      expect.objectContaining(
-        createSuccessResponse({ data: DATA1 })
-      )
-    );
+  it("responds with errors in the envelope on a compile error", async () => {
+    const res = await postCompile({ code: BAD_THEME_CODE, data: {} });
+    expect(res.status).toBe(200);
+    const body = await res.json();
+    expect(body.data).toBeNull();
+    expect(Array.isArray(body.errors)).toBe(true);
+    expect(body.errors.length).toBeGreaterThan(0);
   });
 
-  it.skip("should compile multiple items", async () => {
-    let res;
-    res = await request(app)
-      .post("/task")
-      .send({ task: TASK1 })
-      .expect(200);
-    expect(res).toHaveProperty("body.status", "success");
-    const taskId1 = res.body.data.id;
-
-    res = await request(app)
-      .post("/task")
-      .send({ task: TASK2 })
-      .expect(200);
-    expect(res).toHaveProperty("body.status", "success");
-    const taskId2 = res.body.data.id;
-
-    await request(app)
-      .post("/compile")
-      .send([{ id: taskId1, data: { a: 10 } }, { id: taskId2, data: { b: 20 } }])
-      .expect(200, createSuccessResponse({ data: [DATA1, DATA2] }));
-  });
-
-  it("should return invalid argument for no item", async () => {
-    await request(app)
-      .post("/compile")
-      .send({ item: null })
-      .expect(400, createErrorResponse(createError(400, "item must be a non-null object")));
+  it("responds 400 when required parameters are missing", async () => {
+    const res = await postCompile({ data: {} });
+    expect(res.status).toBe(400);
+    await expect(res.json()).resolves.toEqual({
+      error: "Missing required parameters: code and data",
+    });
   });
 });
