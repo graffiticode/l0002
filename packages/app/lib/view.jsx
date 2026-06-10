@@ -142,7 +142,7 @@ export const View = () => {
   }, [JSON.stringify(state.data)]);
 
   const getDataResp = useSWR(
-    doGetData && accessToken && id && {
+    doGetData && id && {
       accessToken,
       id,
     },
@@ -163,7 +163,7 @@ export const View = () => {
   }
 
   const compileResp = useSWR(
-    doCompile && accessToken && id && {
+    doCompile && id && {
       accessToken,
       id,
       data: state.data,
